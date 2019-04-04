@@ -1,7 +1,0 @@
-simpleGame/core/Direction.class
-simpleGame/core/Game.class
-simpleGame/core/Board.class
-simpleGame/cli/CLIMain.class
-simpleGame/exception/OutOfBoardException.class
-simpleGame/core/Pawn.class
-simpleGame/core/Pawn$1.class
