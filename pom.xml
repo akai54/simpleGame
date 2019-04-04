@@ -40,6 +40,28 @@
 				</executions>
 			</plugin>
 
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.4.2</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>0.8</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<goals>
+							<goal>mutationCoverage</goal>
+						</goals>
+						<phase>pre-site</phase>
+					</execution>
+				</executions>
+			</plugin>
+
+
 
 		</plugins>
 	</build>
@@ -117,6 +139,20 @@
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>RELEASE</version>
 			</plugin>
+
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.4.3</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
 
 		</plugins>
 	</reporting>
