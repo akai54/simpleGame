@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Board.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">simpleGame</a> &gt; <a href="index.source.html" class="el_package">simpleGame.core</a> &gt; <span class="el_source">Board.java</span></div><h1>Board.java</h1><pre class="source lang-java linenums">package simpleGame.core;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+/**
+ * Describes the board on which Pawns can move.
+ * It is of rectangular shape, and is made of squares.
+ * One of the square is a &quot;bonus&quot; square: it allows pawns to be stronger.
+ * @author Erwan Bousse
+ *
+ */
+public class Board {
+
+    /**
+     * The number of squares on the x axis.
+     */
+    private int xSize;
+
+    /**
+     * The number of squares on the y axis.
+     */
+    private int ySize;
+
+    /**
+     * The Pawns that currently are on the board.
+     */
+    private ArrayList&lt;Pawn&gt; pawns;
+
+    /**
+     * The x position of the bonus square
+     */
+    private int xBonusSquare;
+
+    /**
+     * the y position of the bonus square
+     */
+    private int yBonusSquare;
+
+    /**
+     * An iterator pointing towards the current pawn that must play.
+     */
+    private Pawn currentPawn;
+
+
+
+    public int getXSize() {
+<span class="nc" id="L48">        return xSize;</span>
+    }
+
+    public int getYSize() {
+<span class="nc" id="L52">        return ySize;</span>
+    }
+
+    
+    /**
+     * Constructs a board, with a number of pawns and a size.
+     * The pawns are spread randomly.
+     * The bonus square is selected randomly.
+     * @param numberOfPawns The number of pawns.
+     * @param sizeX The number of squares on the x axis.
+     * @param sizeY The number of squares on the y axis.
+     */
+<span class="nc" id="L64">    public Board(int numberOfPawns, int sizeX, int sizeY, int xBonus, int yBonus) {</span>
+<span class="nc" id="L65">        Random random = new Random();</span>
+<span class="nc" id="L66">        this.xSize = sizeX;</span>
+<span class="nc" id="L67">        this.ySize = sizeY;</span>
+<span class="nc" id="L68">        this.xBonusSquare = xBonus;</span>
+<span class="nc" id="L69">        this.yBonusSquare = yBonus;</span>
+<span class="nc" id="L70">        this.pawns = new ArrayList&lt;Pawn&gt;();</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        for(int i = 0; i&lt;numberOfPawns; i++) {</span>
+<span class="nc" id="L72">            Pawn pawn = new Pawn(Character.forDigit(i, 10),</span>
+<span class="nc" id="L73">                                 random.nextInt(xSize),random.nextInt(ySize),this);</span>
+<span class="nc" id="L74">            this.addPawn(pawn);</span>
+        }
+
+<span class="nc" id="L77">        currentPawn = pawns.get(0);</span>
+<span class="nc" id="L78">    }</span>
+
+    /**
+     * Finds the content of a square.
+     * @param x The x axis value.
+     * @param y The y axis value.
+     * @return The pawn found, or null if no pawn.
+     */
+    public Pawn getSquareContent(int x, int y) {
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        for (Pawn p : pawns) {</span>
+<span class="nc bnc" id="L88" title="All 4 branches missed.">            if ((p.getX() == x) &amp;&amp;(p.getY() == y)) {</span>
+<span class="nc" id="L89">                return p;</span>
+            }
+<span class="nc" id="L91">        }</span>
+<span class="nc" id="L92">        return null;</span>
+    }
+
+    /**
+     * Removes a pawn from the board.
+     * @param pawn The pawn to remove.
+     */
+    public void removePawn(Pawn pawn) {
+<span class="nc" id="L100">        pawns.remove(pawn);</span>
+<span class="nc" id="L101">    }</span>
+
+    /**
+     * Adds a pawn to the board.
+     * @param pawn The pawn to add.
+     */
+    public void addPawn(Pawn pawn) {
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (getSquareContent(pawn.getX(),</span>
+<span class="nc" id="L109">                             pawn.getY()) == null)</span>
+<span class="nc" id="L110">            this.pawns.add(pawn);</span>
+<span class="nc" id="L111">    }</span>
+
+    /**
+     * Decides whether a square is bonus or not.
+     * @param x The x axis value.
+     * @param y The y axis value.
+     * @return True if the square is bonus, false otherwise.
+     */
+    public boolean isBonusSquare(int x, int y) {
+<span class="nc bnc" id="L120" title="All 4 branches missed.">        return x==xBonusSquare &amp;&amp; y==yBonusSquare;</span>
+    }
+
+
+    /**
+     * Finds the number of pawns on the board.
+     * @return The number of pawns on the board.
+     */
+    public int numberOfPawns() {
+<span class="nc" id="L129">        return pawns.size();</span>
+    }
+
+    /**
+     * Computes the maximum amount of golf that a Pawn has.
+     * @return The maximum amount of golf that a Pawn has.
+     */
+    public int maxGold() {
+<span class="nc" id="L137">        int max = 0;</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        for (Pawn p : pawns) {</span>
+<span class="nc" id="L139">            max = Math.max(max, p.getGold());</span>
+<span class="nc" id="L140">        }</span>
+<span class="nc" id="L141">        return max;</span>
+    }
+
+    /**
+     * Picks the next pawn that is allowed to play.
+     * @return The next pawn that is allowed to play.
+     */
+    public Pawn getNextPawn() {
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        if (pawns.size() == 1) {</span>
+<span class="nc" id="L150">            currentPawn = pawns.get(0);</span>
+<span class="nc" id="L151">            return pawns.get(0);</span>
+        }
+        else {
+<span class="nc" id="L154">            Pawn result = currentPawn;</span>
+<span class="nc" id="L155">            currentPawn = this.pawns.get((this.pawns.indexOf(</span>
+<span class="nc" id="L156">                                              currentPawn)+1)%this.pawns.size());</span>
+<span class="nc" id="L157">            return result;</span>
+        }
+    }
+
+    /**
+     * Computes the char that should be displayed to represent the square or its content.
+     * @param x The x axis value.
+     * @param y The y axis value.
+     * @return # if bonus, . if empty, c if current Pawn, a number for a non-current Pawn
+     */
+    public char squareContentSprite(int x, int y) {
+        char result;
+<span class="nc" id="L169">        Pawn content = getSquareContent(x,y);</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        if (content == null) {</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">            if (isBonusSquare(x, y)) {</span>
+<span class="nc" id="L172">                result = '#';</span>
+            } else
+<span class="nc" id="L174">                result = '.';</span>
+        } else {
+<span class="nc bnc" id="L176" title="All 2 branches missed.">            if (content == currentPawn) {</span>
+<span class="nc" id="L177">                result = 'c';</span>
+            } else
+<span class="nc" id="L179">                result = content.getLetter();</span>
+        }
+<span class="nc" id="L181">        return result;</span>
+    }
+
+    /**
+     * Computes a String that represents the whole board.
+     */
+    public String toString() {
+<span class="nc" id="L188">        String result = &quot;&quot;;</span>
+
+<span class="nc bnc" id="L190" title="All 2 branches missed.">        for (int y= ySize-1; y&gt;=0; y--) {</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">            for(int x = 0; x&lt;xSize; x++) {</span>
+<span class="nc" id="L192">                result += squareContentSprite(x,y);</span>
+            }
+<span class="nc" id="L194">            result+=&quot;\n&quot;;</span>
+        }
+<span class="nc" id="L196">        return result;</span>
+    }
+
+    
+    /**
+     * Removes all the pawns.
+     */
+	public void removeAllPawns() {
+<span class="nc" id="L204">		pawns.clear();</span>
+<span class="nc" id="L205">		currentPawn = null;</span>
+<span class="nc" id="L206">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

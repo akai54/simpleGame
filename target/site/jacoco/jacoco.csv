@@ -1,0 +1,7 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+simpleGame,simpleGame.exception,OutOfBoardException,15,0,0,0,2,0,1,0,1,0
+simpleGame,simpleGame.cli,CLIMain,82,0,8,0,21,0,6,0,2,0
+simpleGame,simpleGame.core,Board,262,0,28,0,58,0,27,0,13,0
+simpleGame,simpleGame.core,Game,59,0,6,0,10,0,7,0,4,0
+simpleGame,simpleGame.core,Pawn,195,0,23,0,46,0,22,0,9,0
+simpleGame,simpleGame.core,Direction,44,0,0,0,2,0,1,0,1,0
