@@ -39,4 +39,4 @@ has 3 golds.
 The method `isGameOver` is supposed to go over the different pawns, find whether one has three gold, and return true if that is the case.
 This means that the following scenario should work:
 
-![](sequence.svg)
+![](sequence.png)
