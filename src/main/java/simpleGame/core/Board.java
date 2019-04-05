@@ -142,10 +142,14 @@ public class Board {
     }
 
     /**
-     * Picks the next pawn that is allowed to play.
+     * Picks the next pawn that is allowed to play, which is the next pawn in the list of pawns.
      * @return The next pawn that is allowed to play.
      */
     public Pawn getNextPawn() {
+        if (pawns.size() == 0) {
+            return null;
+        }
+
         if (pawns.size() == 1) {
             currentPawn = pawns.get(0);
             return pawns.get(0);
@@ -190,6 +194,9 @@ public class Board {
         for (int y= ySize-1; y>=0; y--) {
             for(int x = 0; x<xSize; x++) {
                 result += squareContentSprite(x,y);
+                if (x == xSize) {
+                    result += '|';
+                }
             }
             result+="\n";
         }

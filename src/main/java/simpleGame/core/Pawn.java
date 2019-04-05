@@ -124,7 +124,7 @@ public class Pawn {
      * The enemy pawn should suffer 1 damage,
      * but it should suffer 2 damages if the current pawn
      * is on a bonus square.
-     * @param ennemy The attacked pawn.
+     * @param enemy The attacked pawn.
      * @return A message that explain what happened during the assault.
      */
     private String attack(Pawn enemy) {
@@ -134,7 +134,10 @@ public class Pawn {
         else
             message+=enemy.suffer(1);
         if (enemy.isDead()) gold++;
-        return message;
+        if (message != "")
+            return message;
+        else
+            return "";
     }
 
     /**
