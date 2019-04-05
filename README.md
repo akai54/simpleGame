@@ -33,3 +33,10 @@ has 3 golds.
     - `Pawn`: Class that describes the state and behavior of a Pawn.
 - `simplegame.exception`: Package with the exceptions used.
     - `OutOfBoardException`: Sent when a Pawn tries to leave the board.
+
+## Specification of `isGameOver`
+
+The method `isGameOver` is supposed to go over the different pawns, find whether one has three gold, and return true if that is the case.
+This means that the following scenario should work:
+
+![](sequence.svg)
