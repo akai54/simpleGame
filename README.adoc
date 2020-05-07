@@ -8,13 +8,16 @@ A very trivial video game with a textual interface, where two ``pawns'' have to 
 
 == Rules of the game
 
-* The setting is a rectangular board, divided in X × Y squares, with one ``bonus'' square, and with N pawns distributed over the board
-* Each pawn has a number, and turns are based on the order of the numbers (e.g. 0 plays first, then 1 plays, then 2 plays, etc.)
+* The setting is a rectangular board, divided in X × Y squares, with two "bonus" squares, and with N pawns distributed over the board
+* Each pawn has a letter, and turns are based on the order of the letters (e.g. A plays first, then B plays, then C plays, etc.)
 * Each turn, a pawn moves in a direction (up, down, left, right). There are two special cases:
-** It encounters a pawn. In that case, it attacks the pawn and hurts it
-** It tries to go out of the board, and loses its turn
-* When attacking, a pawn normally inflicts 1 damage to another pawn. However, it inflicts twice the amount if it is on the ``bonus'' square. If a pawn kills another one, it earns 1 gold.
-* A pawn has 5 hitpoints
+** It encounters a pawn. 
+In that case, it attacks the pawn and hurts it.
+** It tries to go out of the board, and loses its turn.
+* When attacking, a pawn normally inflicts 1 damage to another pawn. 
+However, it inflicts twice the amount if it is on a "bonus" square. 
+If a pawn kills another one, it earns 1 gold.
+* A pawn has 6 hitpoints
 * The game is over either when there is 1 pawn left, either when a pawn has 3 golds.
 
 == Compiling and running the game
@@ -31,7 +34,9 @@ Then to run the game:
 java -jar target/simpleGame-1.jar
 ....
 
-The game then starts, and shows you a board with both Pawns and the special square. A Pawn is either shown as a single letter (`A` or `B`), and is colored in blue when it is its turn (or green when the Pawn is on the special square). The special square is shown as a yellow `#`.
+The game then starts, and shows you a board with both Pawns and the bonus squares. 
+A Pawn is either shown as a single letter (`A` or `B`), and is colored in blue (or green when the Pawn is on a bonus square) when it is its turn. 
+A bonus square is shown as a yellow `#`.
 
 You can type a number between 0 and 3 on your keyboard to select the direction you want the current pawn to pick, and then validate this choice with your return key.
 
