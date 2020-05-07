@@ -4,7 +4,7 @@
 
 == Introduction
 
-A very trivial video game with a textual interface, where two ``pawns'' have to fight by moving on the squares of a board. Written in Java.
+A very trivial video game with a textual interface, where two "pawns" have to fight by moving on the squares of a board. Written in Java.
 
 == Rules of the game
 
@@ -58,4 +58,4 @@ You can type a number between 0 and 3 on your keyboard to select the direction y
 
 The method `isGameOver` is supposed to go over the different pawns, find whether one has three gold, and return true if that is the case. This means that the following scenario should work:
 
-image:sequence.png[image]
+image:sequence.png[]
