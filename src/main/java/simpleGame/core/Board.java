@@ -3,10 +3,13 @@ package simpleGame.core;
 import java.util.ArrayList;
 import java.util.Random;
 
+import simpleGame.util.StringColoring;
+
 /**
- * Describes the board on which Pawns can move.
- * It is of rectangular shape, and is made of squares.
- * One of the square is a "bonus" square: it allows pawns to be stronger.
+ * Describes the board on which Pawns can move. It is of rectangular shape, and
+ * is made of squares. One of the square is a "bonus" square: it allows pawns to
+ * be stronger.
+ * 
  * @author Erwan Bousse
  *
  */
@@ -42,8 +45,6 @@ public class Board {
      */
     private Pawn currentPawn;
 
-
-
     public int getXSize() {
         return xSize;
     }
@@ -52,14 +53,22 @@ public class Board {
         return ySize;
     }
 
-    
     /**
-     * Constructs a board, with a number of pawns and a size.
-     * The pawns are spread randomly.
-     * The bonus square is selected randomly.
+     * Transforms a digit in a letter.
+     * (1 → A, 2 → B, etc.)
+     * Taken from https://stackoverflow.com/a/10813256
+     */
+    private static char getCharForNumber(int i) {
+        return i > 0 && i < 27 ? ((char) (i + 'A' - 1)) : null;
+    }
+
+    /**
+     * Constructs a board, with a number of pawns and a size. The pawns are spread
+     * randomly. The bonus square is selected randomly.
+     * 
      * @param numberOfPawns The number of pawns.
-     * @param sizeX The number of squares on the x axis.
-     * @param sizeY The number of squares on the y axis.
+     * @param sizeX         The number of squares on the x axis.
+     * @param sizeY         The number of squares on the y axis.
      */
     public Board(int numberOfPawns, int sizeX, int sizeY, int xBonus, int yBonus) {
         Random random = new Random();
@@ -68,9 +77,8 @@ public class Board {
         this.xBonusSquare = xBonus;
         this.yBonusSquare = yBonus;
         this.pawns = new ArrayList<Pawn>();
-        for(int i = 0; i<numberOfPawns; i++) {
-            Pawn pawn = new Pawn(Character.forDigit(i, 10),
-                                 random.nextInt(xSize),random.nextInt(ySize),this);
+        for (int i = 1; i <= numberOfPawns; i++) {
+            Pawn pawn = new Pawn(getCharForNumber(i + 1), random.nextInt(xSize), random.nextInt(ySize), this);
             this.addPawn(pawn);
         }
 
@@ -79,13 +87,14 @@ public class Board {
 
     /**
      * Finds the content of a square.
+     * 
      * @param x The x axis value.
      * @param y The y axis value.
      * @return The pawn found, or null if no pawn.
      */
     public Pawn getSquareContent(int x, int y) {
         for (Pawn p : pawns) {
-            if ((p.getX() == x) &&(p.getY() == y)) {
+            if ((p.getX() == x) && (p.getY() == y)) {
                 return p;
             }
         }
@@ -94,6 +103,7 @@ public class Board {
 
     /**
      * Removes a pawn from the board.
+     * 
      * @param pawn The pawn to remove.
      */
     public void removePawn(Pawn pawn) {
@@ -102,27 +112,28 @@ public class Board {
 
     /**
      * Adds a pawn to the board.
+     * 
      * @param pawn The pawn to add.
      */
     public void addPawn(Pawn pawn) {
-        if (getSquareContent(pawn.getX(),
-                             pawn.getY()) == null)
+        if (getSquareContent(pawn.getX(), pawn.getY()) == null)
             this.pawns.add(pawn);
     }
 
     /**
      * Decides whether a square is bonus or not.
+     * 
      * @param x The x axis value.
      * @param y The y axis value.
      * @return True if the square is bonus, false otherwise.
      */
     public boolean isBonusSquare(int x, int y) {
-        return x==xBonusSquare && y==yBonusSquare;
+        return x == xBonusSquare && y == yBonusSquare;
     }
-
 
     /**
      * Finds the number of pawns on the board.
+     * 
      * @return The number of pawns on the board.
      */
     public int numberOfPawns() {
@@ -131,6 +142,7 @@ public class Board {
 
     /**
      * Computes the maximum amount of golf that a Pawn has.
+     * 
      * @return The maximum amount of golf that a Pawn has.
      */
     public int maxGold() {
@@ -142,7 +154,9 @@ public class Board {
     }
 
     /**
-     * Picks the next pawn that is allowed to play, which is the next pawn in the list of pawns.
+     * Picks the next pawn that is allowed to play, which is the next pawn in the
+     * list of pawns.
+     * 
      * @return The next pawn that is allowed to play.
      */
     public Pawn getNextPawn() {
@@ -153,34 +167,44 @@ public class Board {
         if (pawns.size() == 1) {
             currentPawn = pawns.get(0);
             return pawns.get(0);
-        }
-        else {
+        } else {
             Pawn result = currentPawn;
-            currentPawn = this.pawns.get((this.pawns.indexOf(
-                                              currentPawn)+1)%this.pawns.size());
+            currentPawn = this.pawns.get((this.pawns.indexOf(currentPawn) + 1) % this.pawns.size());
             return result;
         }
     }
 
     /**
-     * Computes the char that should be displayed to represent the square or its content.
+     * Computes the char that should be displayed to represent the square or its
+     * content.
+     * 
      * @param x The x axis value.
      * @param y The y axis value.
-     * @return # if bonus, . if empty, c if current Pawn, a number for a non-current Pawn
+     * @return # if bonus, . if empty, c if current Pawn, a number for a non-current
+     *         Pawn
      */
-    public char squareContentSprite(int x, int y) {
-        char result;
-        Pawn content = getSquareContent(x,y);
+    public String squareContentSprite(int x, int y) {
+        String result;
+        Pawn content = getSquareContent(x, y);
         if (content == null) {
             if (isBonusSquare(x, y)) {
-                result = '#';
+                result = StringColoring.colorString('#', StringColoring.Color.YELLOW);
             } else
-                result = '.';
+                result = "⋅";
         } else {
             if (content == currentPawn) {
-                result = 'c';
-            } else
-                result = content.getLetter();
+                if (isBonusSquare(x, y)) {
+                    result = StringColoring.colorString(content.getLetter(), StringColoring.Color.GREEN);
+                } else {
+                    result = StringColoring.colorString(content.getLetter(), StringColoring.Color.BLUE);
+                }
+            } else {
+                if (isBonusSquare(x, y)) {
+                    result = StringColoring.colorString(content.getLetter(), StringColoring.Color.YELLOW);
+                } else {
+                    result = content.getLetter() + "";
+                }
+            }
         }
         return result;
     }
@@ -191,24 +215,23 @@ public class Board {
     public String toString() {
         String result = "";
 
-        for (int y= ySize-1; y>=0; y--) {
-            for(int x = 0; x<xSize; x++) {
-                result += squareContentSprite(x,y);
+        for (int y = ySize - 1; y >= 0; y--) {
+            for (int x = 0; x < xSize; x++) {
+                result += squareContentSprite(x, y);
                 if (x == xSize) {
                     result += '|';
                 }
             }
-            result+="\n";
+            result += "\n";
         }
         return result;
     }
 
-    
     /**
      * Removes all the pawns.
      */
-	public void removeAllPawns() {
-		pawns.clear();
-		currentPawn = null;
-	}
+    public void removeAllPawns() {
+        pawns.clear();
+        currentPawn = null;
+    }
 }
