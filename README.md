@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This software project is a very simple and stupid video game with a textual interface, where two "pawns" have to fight by moving on the squares of a board.
+A very trivial video game with a textual interface, where two "pawns" have to fight by moving on the squares of a board. Written in Java.
 
 ## Rules of the game
 
@@ -22,7 +22,30 @@ a pawn kills another one, it earns 1 gold.
 - The game is over either when there is 1 pawn left, either when a pawn
 has 3 golds.
 
-## Organisation of the code
+## Compiling and running the game
+
+Builds are managed using _maven_.
+To compile simply run:
+
+```
+mvn package
+```
+
+Then to run the game:
+
+```
+java -jar target/simpleGame-1.jar
+```
+
+The game then starts, and shows you a board with both Pawns and the special square.
+A Pawn is either shown as a single letter (`A` or `B`), and is colored in blue when it is its turn (or green when the Pawn is on the special square).
+The special square is shown as a yellow `#`.
+
+You can type a number between 0 and 3 on your keyboard to select the direction you want the current pawn to pick, and then validate this choice with your return key.
+
+## Informations for developers
+
+### Organisation of the code
 
 - `simplegame.cli`: Package with the user interface and the main method.
     - `CLIMain`: The main class, to play the game with a console interface.
@@ -34,7 +57,7 @@ has 3 golds.
 - `simplegame.exception`: Package with the exceptions used.
     - `OutOfBoardException`: Sent when a Pawn tries to leave the board.
 
-## Specification of `isGameOver`
+### Specification of `isGameOver`
 
 The method `isGameOver` is supposed to go over the different pawns, find whether one has three gold, and return true if that is the case.
 This means that the following scenario should work:
