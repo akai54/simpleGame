@@ -1,12 +1,12 @@
 :sectnums:
 
-== A very simple game
+= A very simple game
 
-=== Introduction
+== Introduction
 
 A very trivial video game with a textual interface, where two ``pawns'' have to fight by moving on the squares of a board. Written in Java.
 
-=== Rules of the game
+== Rules of the game
 
 * The setting is a rectangular board, divided in X × Y squares, with one ``bonus'' square, and with N pawns distributed over the board
 * Each pawn has a number, and turns are based on the order of the numbers (e.g. 0 plays first, then 1 plays, then 2 plays, etc.)
@@ -17,7 +17,7 @@ A very trivial video game with a textual interface, where two ``pawns'' have to 
 * A pawn has 5 hitpoints
 * The game is over either when there is 1 pawn left, either when a pawn has 3 golds.
 
-=== Compiling and running the game
+== Compiling and running the game
 
 Builds are managed using _maven_. To compile simply run:
 
@@ -35,9 +35,9 @@ The game then starts, and shows you a board with both Pawns and the special squa
 
 You can type a number between 0 and 3 on your keyboard to select the direction you want the current pawn to pick, and then validate this choice with your return key.
 
-=== Informations for developers
+== Informations for developers
 
-==== Organisation of the code
+=== Organisation of the code
 
 * `simplegame.cli`: Package with the user interface and the main method.
 ** `CLIMain`: The main class, to play the game with a console interface.
@@ -49,7 +49,7 @@ You can type a number between 0 and 3 on your keyboard to select the direction y
 * `simplegame.exception`: Package with the exceptions used.
 ** `OutOfBoardException`: Sent when a Pawn tries to leave the board.
 
-==== Specification of `isGameOver`
+=== Specification of `isGameOver`
 
 The method `isGameOver` is supposed to go over the different pawns, find whether one has three gold, and return true if that is the case. This means that the following scenario should work:
 
