@@ -174,15 +174,13 @@ public class Board {
         }
     }
 
-    /**
-     * Computes the char that should be displayed to represent the square or its
-     * content.
-     * 
-     * @param x The x axis value.
-     * @param y The y axis value.
-     * @return # if bonus, . if empty, c if current Pawn, a number for a non-current
-     *         Pawn
-     */
+   /**
+    * Computes what that should be displayed to represent the square or its content.
+    * 
+    * @param x The x axis value.
+    * @param y The y axis value.
+    * @return A String containing a single character, possibily colored using the `StringColoring` class. The character is '#' if the square is bonus and empty, '.' is the square is not bonus and empty, or simply the character associated to the pawn if the square is not empty. The color is YELLOW if the square is bonus, BLUE if it contains the current pawn, and GREEN if it contains the current pawn AND if the square is bonus. 
+    */
     public String squareContentSprite(int x, int y) {
         String result;
         Pawn content = getSquareContent(x, y);
