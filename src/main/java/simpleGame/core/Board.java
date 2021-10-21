@@ -1,6 +1,7 @@
 package simpleGame.core;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import simpleGame.util.StringColoring;
@@ -28,7 +29,7 @@ public class Board {
     /**
      * The Pawns that currently are on the board.
      */
-    private ArrayList<Pawn> pawns;
+    private List<Pawn> pawns;
 
     /**
      * The x position of the bonus square
@@ -115,7 +116,7 @@ public class Board {
      * 
      * @param pawn The pawn to add.
      */
-    public void addPawn(Pawn pawn) {
+    private void addPawn(Pawn pawn) {
         if (getSquareContent(pawn.getX(), pawn.getY()) == null)
             this.pawns.add(pawn);
     }
