@@ -1,7 +1,7 @@
 package simpleGame.util;
 
 /**
- * Provides operations to color strings for terminals that supports ANSI escapes codes.
+ * Provide operations to color strings for terminals that supports ANSI escapes codes.
  * ANSI escape codes taken from: https://stackoverflow.com/a/5762502
  */
 public class StringColoring {

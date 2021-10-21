@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import simpleGame.util.CharUtil;
 import simpleGame.util.StringColoring;
 
 /**
@@ -32,54 +33,53 @@ public class Board {
     private List<Pawn> pawns;
 
     /**
-     * The x position of the bonus square
+     * The position of the bonus square
      */
-    private int xBonusSquare;
+    private Position bonusSquare;
 
     /**
-     * the y position of the bonus square
-     */
-    private int yBonusSquare;
-
-    /**
-     * An iterator pointing towards the current pawn that must play.
+     * The current pawn that must play.
      */
     private Pawn currentPawn;
 
+    /**
+     * Retrieve the width (x axis) of the board.
+     * 
+     * @return The width (x axis).
+     */
     public int getXSize() {
         return xSize;
     }
 
+    /**
+     * Retrieve the height (y axis) of the board.
+     * 
+     * @return The height (y axis).
+     */
     public int getYSize() {
         return ySize;
     }
 
     /**
-     * Transforms a digit in a letter.
-     * (1 → A, 2 → B, etc.)
-     * Taken from https://stackoverflow.com/a/10813256
-     */
-    private static char getCharForNumber(int i) {
-        return i > 0 && i < 27 ? ((char) (i + 'A' - 1)) : null;
-    }
-
-    /**
-     * Constructs a board, with a number of pawns and a size. The pawns are spread
-     * randomly. The bonus square is selected randomly.
+     * Construct a board, with a number of pawns, a size, and a bonus square. The
+     * pawns are spread randomly on the board.
+     * 
+     * Each Pawn is named using a letter (A, B, C, etc.).
      * 
      * @param numberOfPawns The number of pawns.
      * @param sizeX         The number of squares on the x axis.
      * @param sizeY         The number of squares on the y axis.
+     * @param xBonus        The x position of the bonus square.
+     * @param yBonus        The y position of the bonus square.
      */
     public Board(int numberOfPawns, int sizeX, int sizeY, int xBonus, int yBonus) {
         Random random = new Random();
         this.xSize = sizeX;
         this.ySize = sizeY;
-        this.xBonusSquare = xBonus;
-        this.yBonusSquare = yBonus;
+        this.bonusSquare = new Position(xBonus, yBonus);
         this.pawns = new ArrayList<Pawn>();
         for (int i = 1; i <= numberOfPawns; i++) {
-            Pawn pawn = new Pawn(getCharForNumber(i + 1), random.nextInt(xSize), random.nextInt(ySize), this);
+            Pawn pawn = new Pawn(CharUtil.getCharForNumber(i + 1), random.nextInt(xSize), random.nextInt(ySize), this);
             this.addPawn(pawn);
         }
 
@@ -87,15 +87,15 @@ public class Board {
     }
 
     /**
-     * Finds the content of a square.
+     * Find the content of a square.
      * 
      * @param x The x axis value.
      * @param y The y axis value.
      * @return The pawn found, or null if no pawn.
      */
-    public Pawn getSquareContent(int x, int y) {
+    public Pawn getSquareContent(Position squarePosition) {
         for (Pawn p : pawns) {
-            if ((p.getX() == x) && (p.getY() == y)) {
+            if (p.getPosition().equals(squarePosition)) {
                 return p;
             }
         }
@@ -103,7 +103,7 @@ public class Board {
     }
 
     /**
-     * Removes a pawn from the board.
+     * Remove a pawn from the board.
      * 
      * @param pawn The pawn to remove.
      */
@@ -111,29 +111,23 @@ public class Board {
         pawns.remove(pawn);
     }
 
-    /**
-     * Adds a pawn to the board.
-     * 
-     * @param pawn The pawn to add.
-     */
     private void addPawn(Pawn pawn) {
-        if (getSquareContent(pawn.getX(), pawn.getY()) == null)
+        if (getSquareContent(pawn.getPosition()) == null)
             this.pawns.add(pawn);
     }
 
     /**
-     * Decides whether a square is bonus or not.
+     * Tell whether a square is bonus or not.
      * 
-     * @param x The x axis value.
-     * @param y The y axis value.
+     * @param squarePosition The position of the square.
      * @return True if the square is bonus, false otherwise.
      */
-    public boolean isBonusSquare(int x, int y) {
-        return x == xBonusSquare && y == yBonusSquare;
+    public boolean isBonusSquare(Position squarePosition) {
+        return this.bonusSquare.equals(squarePosition);
     }
 
     /**
-     * Finds the number of pawns on the board.
+     * Find the number of pawns on the board.
      * 
      * @return The number of pawns on the board.
      */
@@ -142,9 +136,9 @@ public class Board {
     }
 
     /**
-     * Computes the maximum amount of golf that a Pawn has.
+     * Compute the maximum amount of gold that a Pawn has.
      * 
-     * @return The maximum amount of golf that a Pawn has.
+     * @return The maximum amount of gold that a Pawn has.
      */
     public int maxGold() {
         int max = 0;
@@ -155,50 +149,45 @@ public class Board {
     }
 
     /**
-     * Picks the next pawn that is allowed to play, which is the next pawn in the
-     * list of pawns.
-     * 
-     * @return The next pawn that is allowed to play.
+     * Change the current pawn to the next pawn in the list.
      */
-    public Pawn getNextPawn() {
-        if (pawns.size() == 0) {
-            return null;
-        }
-
+    public void newTurn() {
         if (pawns.size() == 1) {
             currentPawn = pawns.get(0);
-            return pawns.get(0);
         } else {
-            Pawn result = currentPawn;
             currentPawn = this.pawns.get((this.pawns.indexOf(currentPawn) + 1) % this.pawns.size());
-            return result;
         }
     }
 
-   /**
-    * Computes what that should be displayed to represent the square or its content.
-    * 
-    * @param x The x axis value.
-    * @param y The y axis value.
-    * @return A String containing a single character, possibily colored using the `StringColoring` class. The character is '#' if the square is bonus and empty, '.' is the square is not bonus and empty, or simply the character associated to the pawn if the square is not empty. The color is YELLOW if the square is bonus, BLUE if it contains the current pawn, and GREEN if it contains the current pawn AND if the square is bonus. 
-    */
-    public String squareContentSprite(int x, int y) {
+    /**
+     * Compute what that should be displayed to represent the square or its content.
+     * 
+     * @param p the position of the square.
+     * @return A String containing a single character, possibily colored using the
+     *         `StringColoring` class. The character is '#' if the square is bonus
+     *         and empty, '.' is the square is not bonus and empty, or simply the
+     *         character associated to the pawn if the square is not empty. The
+     *         color is YELLOW if the square is bonus, BLUE if it contains the
+     *         current pawn, and GREEN if it contains the current pawn AND if the
+     *         square is bonus.
+     */
+    public String squareContentSprite(Position p) {
         String result;
-        Pawn content = getSquareContent(x, y);
+        Pawn content = getSquareContent(p);
         if (content == null) {
-            if (isBonusSquare(x, y)) {
+            if (isBonusSquare(p)) {
                 result = StringColoring.colorString('#', StringColoring.Color.YELLOW);
             } else
                 result = "⋅";
         } else {
             if (content == currentPawn) {
-                if (isBonusSquare(x, y)) {
+                if (isBonusSquare(p)) {
                     result = StringColoring.colorString(content.getLetter(), StringColoring.Color.GREEN);
                 } else {
                     result = StringColoring.colorString(content.getLetter(), StringColoring.Color.BLUE);
                 }
             } else {
-                if (isBonusSquare(x, y)) {
+                if (isBonusSquare(p)) {
                     result = StringColoring.colorString(content.getLetter(), StringColoring.Color.YELLOW);
                 } else {
                     result = content.getLetter() + "";
@@ -209,14 +198,24 @@ public class Board {
     }
 
     /**
-     * Computes a String that represents the whole board.
+     * Computes a String that represents the whole board. Relies on
+     * 'squareContentSprite' to print each square.
+     * 
+     * Example (without colors):
+     * 
+     * ⋅⋅⋅⋅ 
+     * ⋅⋅A⋅ 
+     * B⋅⋅⋅ 
+     * #⋅⋅⋅
+     * 
      */
     public String toString() {
         String result = "";
 
         for (int y = ySize - 1; y >= 0; y--) {
             for (int x = 0; x < xSize; x++) {
-                result += squareContentSprite(x, y);
+                Position squarePosition = new Position(x, y);
+                result += squareContentSprite(squarePosition);
                 if (x == xSize) {
                     result += '|';
                 }
@@ -227,10 +226,48 @@ public class Board {
     }
 
     /**
-     * Removes all the pawns.
+     * Remove all the pawns.
      */
     public void removeAllPawns() {
         pawns.clear();
         currentPawn = null;
     }
+
+    /**
+     * The status of a square of the board:
+     */
+    public enum SquareStatus {
+        OUT_OF_BOARD, EMPTY, OCCUPIED
+    }
+
+    /**
+     * Retrieve the status of a square of the board.
+     * 
+     * @param p The position of the square to look at.
+     * @return OUT_OF_BOARD is the square is out of board, EMPTY is the square is in
+     *         the board but without a pawn, OCCUPIED if the square is in the board
+     *         with a pawn.
+     */
+    public SquareStatus getStatusOfSquare(Position p) {
+        int x = p.getX();
+        int y = p.getY();
+        if (y <= this.getYSize() && x <= this.getXSize() && y > 0 && x > 0) {
+            Pawn content = this.getSquareContent(p);
+            if (content == null) {
+                return SquareStatus.EMPTY;
+            } else {
+                return SquareStatus.OCCUPIED;
+            }
+        } else {
+            return SquareStatus.OUT_OF_BOARD;
+        }
+    }
+
+    /**
+     * Retrieve the current pawn.
+     */
+    public Pawn getCurrentPawn() {
+        return this.currentPawn;
+    }
+
 }
