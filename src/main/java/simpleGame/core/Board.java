@@ -89,8 +89,7 @@ public class Board {
     /**
      * Find the content of a square.
      * 
-     * @param x The x axis value.
-     * @param y The y axis value.
+     * @param squarePosition The position to analyze.
      * @return The pawn found, or null if no pawn.
      */
     public Pawn getSquareContent(Position squarePosition) {
