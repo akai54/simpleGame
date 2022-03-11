@@ -103,6 +103,7 @@ public class Board {
 
     /**
      * Remove a pawn from the board.
+     * If the pawn does not exist in the Board, does nothing.
      * 
      * @param pawn The pawn to remove.
      */

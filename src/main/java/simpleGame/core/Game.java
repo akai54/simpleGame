@@ -3,7 +3,6 @@ package simpleGame.core;
 import java.util.Random;
 
 import simpleGame.exception.ImpossibleActionException;
-import simpleGame.util.Logger;
 
 /**
  * Represents an instance of the simple game. Controls the board and the pawns.
