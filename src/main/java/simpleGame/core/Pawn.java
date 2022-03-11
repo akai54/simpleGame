@@ -106,7 +106,7 @@ public class Pawn {
     public void suffer(int i) {
         Logger.log(this.letter + " loses " + i + " hitpoints.");
         hitpoints = hitpoints - i;
-        if (hitpoints <= 0) {
+        if (this.isDead()) {
             this.board.removePawn(this);
             Logger.log(this.letter + " is dead.");
         }
