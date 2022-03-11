@@ -114,6 +114,7 @@ public class Pawn {
 
     /**
      * To know whether a pawn is dead or not.
+     * A pawn is considered dead when it reaches zero hitpoints.
      * 
      * @return True if the pawn is dead, false otherwise.
      */
@@ -125,6 +126,8 @@ public class Pawn {
      * Make the pawn attack another position. If any, the enemy pawn should suffer 1
      * damage, but it should suffer 2 damages if the current pawn is on a bonus
      * square.
+     * 
+     * If the enemy pawn dies, then the current pawn obtains 1 gold.
      * 
      * @param enemy The attacked pawn.
      * @throws ImpossibleActionException If the target position is too far or empty.
