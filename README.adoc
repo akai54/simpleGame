@@ -20,18 +20,22 @@ If a pawn kills another one, it earns 1 gold.
 * A pawn has 6 hitpoints
 * The game is over either when there is 1 pawn left, either when a pawn has 3 golds.
 
-== Compiling and running the game
 
-Builds are managed using _maven_. To compile simply run:
+== Informations for developers
+
+=== Compiling and running the game for development
+
+Builds are managed using _maven_. 
+To compile simply run:
 
 ....
-mvn package
+mvn compile
 ....
 
 Then to run the game:
 
 ....
-java -jar target/simpleGame-1.jar
+mvn exec:java
 ....
 
 The game then starts, and shows you a board with both Pawns and the bonus squares. 
@@ -40,7 +44,20 @@ A bonus square is shown as a yellow `#`.
 
 You can type a number between 0 and 3 on your keyboard to select the direction you want the current pawn to pick, and then validate this choice with your return key.
 
-== Informations for developers
+=== Packaging and distribution the game
+
+To produce a single executable jar file with all dependencies, simply run:
+
+....
+mvn package
+....
+
+This will produce a file `target/simpleGame-1-jar-with-dependencies.jar` which can be easily distributed, and used with a simple `java` command:
+
+....
+java -jar simpleGame-1-jar-with-dependencies.jar
+....
+
 
 === Organisation of the code
 
