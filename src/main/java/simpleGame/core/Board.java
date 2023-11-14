@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 import simpleGame.util.CharUtil;
 import simpleGame.util.StringColoring;
+import simpleGame.util.StringColoring.GameColor;
 
 /**
  * Describes the board on which Pawns can move. It is of rectangular shape, and
@@ -176,19 +178,19 @@ public class Board {
         Pawn content = getSquareContent(p);
         if (content == null) {
             if (isBonusSquare(p)) {
-                result = StringColoring.colorString('#', StringColoring.Color.YELLOW);
+                result = StringColoring.colorString('#', GameColor.YELLOW);
             } else
                 result = "⋅";
         } else {
             if (content == currentPawn) {
                 if (isBonusSquare(p)) {
-                    result = StringColoring.colorString(content.getLetter(), StringColoring.Color.GREEN);
+                    result = StringColoring.colorString(content.getLetter(), GameColor.GREEN);
                 } else {
-                    result = StringColoring.colorString(content.getLetter(), StringColoring.Color.BLUE);
+                    result = StringColoring.colorString(content.getLetter(), GameColor.BLUE);
                 }
             } else {
                 if (isBonusSquare(p)) {
-                    result = StringColoring.colorString(content.getLetter(), StringColoring.Color.YELLOW);
+                    result = StringColoring.colorString(content.getLetter(), GameColor.YELLOW);
                 } else {
                     result = content.getLetter() + "";
                 }
