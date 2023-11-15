@@ -44,8 +44,7 @@
 - [ ] **Tests pour la méthode getLetter() et getGold()** : Assurez-vous que ces méthodes retournent les valeurs correctes.
 
 ### Position
-- [ ] **Test du constructeur** : Vérifiez que l'objet Position est correctement initialisé avec les coordonnées x et y données.
-- [ ] **Tests Getter** : Testez les méthodes getX() et getY() pour vous assurer qu'elles renvoient les valeurs correctes.
+- [x] **Test du constructeur** : Vérifiez que l'objet Position est correctement initialisé avec les coordonnées x et y données.
 - [ ] **Test de copy** : Vérifiez que la méthode copy() crée une copie exacte de l'objet Position.
 - [ ] **Tests GetPositionNextTo** :
     - Testez chaque direction (haut, bas, gauche, droite) pour vous assurer que la méthode renvoie la position adjacente correcte.

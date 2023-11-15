@@ -8,8 +8,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class PositionTest {
 
     @Test
+    @DisplayName("Constructor correctly initialized")
+    void testPositionConstructor() {
+        Position position = new Position(3,4);
+        assertEquals(3, position.getX());
+        assertEquals(4, position.getY());
+    }
+
+    @Test
     @DisplayName("create object with same coordinates")
-    void copy() {
+    void testCopy() {
     }
 
     @Test
