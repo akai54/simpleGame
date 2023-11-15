@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static simpleGame.core.Direction.Right;
 
 class PositionTest {
 
@@ -27,7 +28,24 @@ class PositionTest {
 
     @Test
     @DisplayName("create object next to coordinates")
-    void getPositionNextTo() {
+    void testGetPositionNextTo() {
+        Position position = new Position(3,4);
+
+        Position nextToPositionRight = position.getPositionNextTo(Direction.Right);
+        assertEquals(nextToPositionRight.getX(), position.getX() + 1);
+        assertEquals(position.getY(), nextToPositionRight.getY());
+
+        Position nextToPositionLeft = position.getPositionNextTo(Direction.Left);
+        assertEquals(nextToPositionLeft.getX(), position.getX() - 1);
+        assertEquals(position.getY(), nextToPositionLeft.getY());
+
+        Position nextToPositionDown = position.getPositionNextTo(Direction.Down);
+        assertEquals(nextToPositionDown.getX(), position.getX());
+        assertEquals(position.getY(), nextToPositionDown.getY() + 1);
+
+        Position nextToPositionUp = position.getPositionNextTo(Direction.Up);
+        assertEquals(nextToPositionUp.getX(), position.getX());
+        assertEquals(position.getY(), nextToPositionUp.getY() - 1);
     }
 
     @Test
