@@ -18,6 +18,11 @@ class PositionTest {
     @Test
     @DisplayName("create object with same coordinates")
     void testCopy() {
+        Position originalPosition = new Position(3,4);
+        Position copied = originalPosition.copy();
+
+        assertEquals(originalPosition.getX(), copied.getX());
+        assertEquals(originalPosition.getY(), copied.getY());
     }
 
     @Test
