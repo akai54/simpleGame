@@ -50,7 +50,7 @@ class PositionTest {
 
     @Test
     @DisplayName("Is coords next to other coords")
-    void isNextTo() {
+    void testIsNextTo() {
         Position position = new Position(3,4);
 
         /* Test position adjacent */
