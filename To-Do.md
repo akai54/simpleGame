@@ -1,7 +1,7 @@
 # Simple Game
 
 ### Board
-- [ ] **Test du constructeur** : Vérifiez l'initialisation correcte du plateau, y compris les dimensions, la case bonus et le placement des pions.
+- [x] **Test du constructeur** : Vérifiez l'initialisation correcte du plateau, y compris les dimensions, la case bonus.
 - [ ] **Test GetSquareContent** : Testez les carrés occupés et vides.
 - [ ] **Test RemovePawn** : Vérifiez qu’un pion est correctement retiré du plateau.
 - [ ] **Test IsBonusSquare** : Vérifiez si la méthode identifie avec précision le carré bonus.
