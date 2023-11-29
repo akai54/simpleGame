@@ -22,6 +22,18 @@ class BoardTest {
 
     @Test
     void getSquareContent() {
+        Board board = new Board(2,4,4,3,4);
+        Pawn pawn = new Pawn('E', 3, 4, board);
+
+        /* On suppose que addPawn() ajoute un pion au plateau correctement */
+        board.addPawn(pawn);
+
+        /* Test que les coordonnées renvoyées par getSquareContent() corresponde à pawn */
+        assertEquals(pawn, board.getSquareContent(new Position(3,4)));
+        /* les coordonnées de la case où se trouve pawn n'est pas equivalent à Null */
+        assertNotNull(board.getSquareContent(new Position(3,4)));
+        /* les coordonnées où, il n'y a pas de pions, renvoi Null */
+        assertNull(board.getSquareContent(new Position(2,2)));
     }
 
     @Test
