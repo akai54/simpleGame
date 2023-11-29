@@ -73,5 +73,15 @@ class PositionTest {
     @Test
     @DisplayName("coords equals to other")
     void testEquals() {
+        Position position1 = new Position(3,4);
+        Position position2 = new Position(3,4);
+        Position position3 = new Position(4,5);
+
+        /* Test deux objets avec les memes coordonnées */
+        assertTrue(position1.equals(position2));
+
+        /* Test deux objets qui ont pas les memes coordonnées */
+        assertFalse(position1.equals(position3));
+
     }
 }

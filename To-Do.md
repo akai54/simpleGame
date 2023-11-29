@@ -51,6 +51,6 @@
 - [x] **Test IsNextTo** :
     - Vérifiez que isNextTo identifie correctement les positions adjacentes (y compris les diagonales).
     - Testez les positions non adjacentes pour vous assurer qu’elles renvoient faux.
-- [ ] **Test égal** :
+- [x] **Test égal** :
     - Testez avec un type d'objet différent et des positions différentes pour vous assurer qu'il renvoie false de manière appropriée.
     - **Tests pour la méthode equals(Object other)** : Assurez-vous que la méthode fonctionne correctement en comparant des positions identiques et différentes.
