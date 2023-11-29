@@ -51,6 +51,23 @@ class PositionTest {
     @Test
     @DisplayName("Is coords next to other coords")
     void isNextTo() {
+        Position position = new Position(3,4);
+
+        /* Test position adjacent */
+        assertTrue(position.isNextTo(new Position(2,3)));
+        assertTrue(position.isNextTo(new Position(2,4)));
+        assertTrue(position.isNextTo(new Position(2,5)));
+        assertTrue(position.isNextTo(new Position(3,3)));
+        assertTrue(position.isNextTo(new Position(3,5)));
+        assertTrue(position.isNextTo(new Position(4,3)));
+        assertTrue(position.isNextTo(new Position(4,4)));
+        assertTrue(position.isNextTo(new Position(4,5)));
+
+        /* Test non-adjacent positions */
+        assertFalse(position.isNextTo(new Position(3, 6)));
+        assertFalse(position.isNextTo(new Position(1, 4)));
+        assertFalse(position.isNextTo(new Position(5, 4)));
+        assertFalse(position.isNextTo(new Position(3, 1)));
     }
 
     @Test

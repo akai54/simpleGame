@@ -45,10 +45,10 @@
 
 ### Position
 - [x] **Test du constructeur** : Vérifiez que l'objet Position est correctement initialisé avec les coordonnées x et y données.
-- [ ] **Test de copy** : Vérifiez que la méthode copy() crée une copie exacte de l'objet Position.
-- [ ] **Tests GetPositionNextTo** :
+- [x] **Test de copy** : Vérifiez que la méthode copy() crée une copie exacte de l'objet Position.
+- [x] **Tests GetPositionNextTo** :
     - Testez chaque direction (haut, bas, gauche, droite) pour vous assurer que la méthode renvoie la position adjacente correcte.
-- [ ] **Test IsNextTo** :
+- [x] **Test IsNextTo** :
     - Vérifiez que isNextTo identifie correctement les positions adjacentes (y compris les diagonales).
     - Testez les positions non adjacentes pour vous assurer qu’elles renvoient faux.
 - [ ] **Test égal** :
