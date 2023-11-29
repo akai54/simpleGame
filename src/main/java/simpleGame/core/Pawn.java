@@ -42,11 +42,20 @@ public class Pawn {
 
     /**
      * Retrieve the letter of the pawn.
-     * 
+     *
      * @return The letter of the pawn.
      */
     public char getLetter() {
         return letter;
+    }
+
+    /** ADDED BY TESTERS
+     * Retrieve the amount of hitpoint of the pawn.
+     *
+     * @return The amount od hitpoint of the pawn.
+     */
+    public int getHitpoints() {
+        return hitpoints;
     }
 
     /**
