@@ -17,7 +17,7 @@
 - [ ] **Tests squareContentSprite(Position p)** : Assurez-vous que les différentes représentations de carrés sont correctes.
 
 ### Direction
-- [ ] **Test des valeurs de l'énumération** : Vérifiez que l'énumération Direction contient les valeurs correctes (Up, Down, Left, Right).
+- [x] **Test des valeurs de l'énumération** : Vérifiez que l'énumération Direction contient les valeurs correctes (Up, Down, Left, Right).
 
 ### Game
 - [ ] **Test du constructeur** : Vérifiez que le constructeur du jeu initialise un plateau avec les dimensions et le nombre de pions corrects.
