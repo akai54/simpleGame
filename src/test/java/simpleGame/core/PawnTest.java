@@ -16,7 +16,7 @@ public class PawnTest {
 
         assertEquals(pawn.getLetter(), 'c');
         assertEquals(pawn.getGold(), 0);
-        //assertEquals(pawn.getHitpoints(), 2);
+        assertEquals(pawn.getHitpoints(), 2);
         assertTrue(pawn.getPosition().equals(new Position(1,1)));
     }
 
@@ -59,7 +59,21 @@ public class PawnTest {
         assertThrows(ImpossibleActionException.class, () -> pawn0.move(new Position(3,4)));
     }
 
-    
+    @Test
+    @DisplayName("Test if the pawn take hitpoints")
+    void testSuffer(){
+        Board board = new Board(3,5,5, 2, 2);
+        Pawn pawn = new Pawn( 'c', 0, 0, board);
+
+        pawn.suffer(1);
+
+        assertEquals(pawn.getHitpoints(), 1);
+    }
+
+    @Test
+    @DisplayName("Test if the pawn take hitpoints and is removed from the game")
+    void testSufferAndRemove(){
+    }
 
 
     /*
