@@ -272,4 +272,12 @@ public class Board {
         return this.currentPawn;
     }
 
+    /**
+     * Retrieve the current bonus Square.
+     */
+    public Position getBonusSquare() {
+        return bonusSquare;
+    }
 }
+
+
