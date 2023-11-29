@@ -113,7 +113,7 @@ public class Board {
         pawns.remove(pawn);
     }
 
-    private void addPawn(Pawn pawn) {
+    public void addPawn(Pawn pawn) {
         if (getSquareContent(pawn.getPosition()) == null)
             this.pawns.add(pawn);
     }
