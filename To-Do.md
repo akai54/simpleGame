@@ -13,7 +13,7 @@
 - [ ] **Test GetStatusOfSquare** : Testez différents statuts de carrés (occupés, vides, hors du tableau).
 - [ ] **Test GetCurrentPawn** : Vérifiez que la méthode renvoie correctement le pion actuel.
 - [x] **Test addPawn(Pawn pawn)** : Assurez-vous que les pions sont correctement ajoutés au plateau.
-- [ ] **Test removeAllPawns()** : Vérifiez que tous les pions sont correctement retirés du plateau.
+- [x] **Test removeAllPawns()** : Vérifiez que tous les pions sont correctement retirés du plateau.
 - [ ] **Tests squareContentSprite(Position p)** : Assurez-vous que les différentes représentations de carrés sont correctes.
 
 ### Direction

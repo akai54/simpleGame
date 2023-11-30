@@ -82,6 +82,24 @@ class BoardTest {
     }
 
     @Test
+    void testRemoveAllPawns() {
+        Board board = new Board(2,5,5,3,4);
+        Pawn pawn1 = new Pawn('E', 4, 4, board);
+        Pawn pawn2 = new Pawn('Z', 4, 1, board);
+
+        board.addPawn(pawn1);
+        board.addPawn(pawn2);
+
+        assertEquals(pawn1, board.getSquareContent(new Position(4,4)));
+        assertEquals(pawn2, board.getSquareContent(new Position(4,1)));
+
+        board.removeAllPawns();
+
+        assertNull(board.getSquareContent(new Position(4,4)));
+        assertNull(board.getSquareContent(new Position(4,1)));
+    }
+
+    @Test
     void getCurrentPawn() {
     }
 }
