@@ -67,7 +67,11 @@ class BoardTest {
     }
 
     @Test
-    void isBonusSquare() {
+    void testIsBonusSquare() {
+        Board board = new Board(2,4,4,3,4);
+
+        assertTrue(board.isBonusSquare(new Position(3,4)));
+        assertFalse(board.isBonusSquare(new Position(1,1)));
     }
 
     @Test
