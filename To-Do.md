@@ -2,7 +2,7 @@
 
 ### Board
 - [x] **Test du constructeur** : Vérifiez l'initialisation correcte du plateau, y compris les dimensions, la case bonus.
-- [ ] **Test GetSquareContent** : Testez les carrés occupés et vides.
+- [x] **Test GetSquareContent** : Testez les carrés occupés et vides.
 - [ ] **Test RemovePawn** : Vérifiez qu’un pion est correctement retiré du plateau.
 - [ ] **Test IsBonusSquare** : Vérifiez si la méthode identifie avec précision le carré bonus.
 - [ ] **Test NumberOfPawns** : Vérifiez le nombre de pions sur le plateau après diverses opérations comme l'ajout ou la suppression de pions.
@@ -12,7 +12,7 @@
 - [ ] **Test ToString** : Vérifiez la représentation correcte des chaînes de l'ensemble de la carte.
 - [ ] **Test GetStatusOfSquare** : Testez différents statuts de carrés (occupés, vides, hors du tableau).
 - [ ] **Test GetCurrentPawn** : Vérifiez que la méthode renvoie correctement le pion actuel.
-- [ ] **Test addPawn(Pawn pawn)** : Assurez-vous que les pions sont correctement ajoutés au plateau.
+- [x] **Test addPawn(Pawn pawn)** : Assurez-vous que les pions sont correctement ajoutés au plateau.
 - [ ] **Test removeAllPawns()** : Vérifiez que tous les pions sont correctement retirés du plateau.
 - [ ] **Tests squareContentSprite(Position p)** : Assurez-vous que les différentes représentations de carrés sont correctes.
 

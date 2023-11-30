@@ -11,17 +11,28 @@ class BoardTest {
     @DisplayName("Test Constructeur")
     void testBoardConstruct() {
         Board board = new Board(2,4,4,3,4);
-
         /* Test position case bonus */
         assertEquals(board.getBonusSquare(), new Position(3,4));
-
         /* Test dimensions du plateau */
         assertEquals(board.getXSize(), 4);
         assertEquals(board.getYSize(), 4);
     }
 
     @Test
-    void getSquareContent() {
+    void testAddPawn() {
+        Board board = new Board(2,4,4,3,4);
+        /* On s'assure que la position où il y aura pawn est vide et renvoi Null pour l'instant */
+        assertNull(board.getSquareContent(new Position(3,3)));
+        /* On ajoute pawn à la meme position d'en haut */
+        Pawn pawn = new Pawn('E', 3, 3, board);
+        board.addPawn(pawn);
+        /* On vérifie que cette fois la meme position renvoi bien le pawn et non pas Null */
+        assertEquals(pawn, board.getSquareContent(new Position(3,3)));
+        assertNotNull(board.getSquareContent(new Position(3,3)));
+    }
+
+    @Test
+    void testGetSquareContent() {
         Board board = new Board(2,4,4,3,4);
         Pawn pawn = new Pawn('E', 3, 4, board);
 
