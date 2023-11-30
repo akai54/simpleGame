@@ -3,7 +3,7 @@
 ### Board
 - [x] **Test du constructeur** : Vérifiez l'initialisation correcte du plateau, y compris les dimensions, la case bonus.
 - [x] **Test GetSquareContent** : Testez les carrés occupés et vides.
-- [ ] **Test RemovePawn** : Vérifiez qu’un pion est correctement retiré du plateau.
+- [x] **Test RemovePawn** : Vérifiez qu’un pion est correctement retiré du plateau.
 - [ ] **Test IsBonusSquare** : Vérifiez si la méthode identifie avec précision le carré bonus.
 - [ ] **Test NumberOfPawns** : Vérifiez le nombre de pions sur le plateau après diverses opérations comme l'ajout ou la suppression de pions.
 - [ ] **Test MaxGold** : Testez si la méthode calcule correctement l'or maximum détenu par n'importe quel pion.

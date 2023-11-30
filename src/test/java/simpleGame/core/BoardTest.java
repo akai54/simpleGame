@@ -49,6 +49,21 @@ class BoardTest {
 
     @Test
     void removePawn() {
+        Board board = new Board(2,4,4,3,4);
+        /* On s'assure que la position où il y aura pawn est vide et renvoi Null pour l'instant */
+        assertNull(board.getSquareContent(new Position(1,1)));
+
+        /* On ajoute pawn à la meme position d'en haut */
+        Pawn pawn = new Pawn('E', 1, 1, board);
+        board.addPawn(pawn);
+
+        /* On vérifie que cette fois la meme position renvoi bien le pawn et non pas Null */
+        assertEquals(pawn, board.getSquareContent(new Position(1,1)));
+        assertNotNull(board.getSquareContent(new Position(1,1)));
+
+        /* On enlève le pion et on s'assure que cette position renvoi Null désormais */
+        board.removePawn(pawn);
+        assertNull(board.getSquareContent(new Position(1,1)));
     }
 
     @Test
