@@ -5,7 +5,7 @@
 - [x] **Test GetSquareContent** : Testez les carrés occupés et vides.
 - [x] **Test RemovePawn** : Vérifiez qu’un pion est correctement retiré du plateau.
 - [x] **Test IsBonusSquare** : Vérifiez si la méthode identifie avec précision le carré bonus.
-- [ ] **Test NumberOfPawns** : Vérifiez le nombre de pions sur le plateau après diverses opérations comme l'ajout ou la suppression de pions.
+- [x] **Test NumberOfPawns** : Vérifiez le nombre de pions sur le plateau après diverses opérations comme l'ajout ou la suppression de pions.
 - [ ] **Test MaxGold** : Testez si la méthode calcule correctement l'or maximum détenu par n'importe quel pion.
 - [ ] **Test NewTurn** : Assurez-vous que le jeu met correctement à jour le pion actuel après chaque tour.
 - [ ] **Test SquareContentSprite** : Testez la représentation visuelle des différentes cases du plateau (y compris les cases bonus et les cases avec pions).

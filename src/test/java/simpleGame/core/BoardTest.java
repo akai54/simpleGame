@@ -76,6 +76,9 @@ class BoardTest {
 
     @Test
     void numberOfPawns() {
+        Board board = new Board(2,4,4,3,4);
+
+        assertEquals(2, board.numberOfPawns());
     }
 
     @Test
