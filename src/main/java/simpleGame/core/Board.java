@@ -81,7 +81,7 @@ public class Board {
         this.bonusSquare = new Position(xBonus, yBonus);
         this.pawns = new ArrayList<Pawn>();
         for (int i = 1; i <= numberOfPawns; i++) {
-            Pawn pawn = new Pawn(CharUtil.getCharForNumber(i + 1), random.nextInt(xSize), random.nextInt(ySize), this);
+            Pawn pawn = new Pawn(CharUtil.getCharForNumber(i), random.nextInt(xSize), random.nextInt(ySize), this);
             this.addPawn(pawn);
         }
 
