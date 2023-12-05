@@ -66,6 +66,7 @@ public class Game {
             throw new ImpossibleActionException("You cannot act in that direction, it is out of the board!");
         case EMPTY:
             currentPawn.move(nextPosition);
+            break;
         case OCCUPIED:
             currentPawn.attack(nextPosition);
             break;
