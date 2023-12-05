@@ -10,7 +10,7 @@ public class StringColoring {
      * Supported colors.
      */
     public enum GameColor {
-        BLACK, RED, GREEN, YELLOW, BLUE, PURPLE, CYAN, WHITE
+        BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE
     }
 
     /**
