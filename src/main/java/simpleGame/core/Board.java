@@ -253,14 +253,16 @@ public class Board {
     public SquareStatus getStatusOfSquare(Position p) {
         int x = p.getX();
         int y = p.getY();
-        if (y <= this.getYSize() && x <= this.getXSize() && y > 0 && x > 0) {
+
+        if (y <= this.getYSize() && x <= this.getXSize() && y >= 0 && x >= 0) {
             Pawn content = this.getSquareContent(p);
             if (content == null) {
                 return SquareStatus.EMPTY;
             } else {
                 return SquareStatus.OCCUPIED;
             }
-        } else {
+        }
+        else {
             return SquareStatus.OUT_OF_BOARD;
         }
     }
