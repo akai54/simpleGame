@@ -63,6 +63,7 @@ public class Game {
 
         switch (this.board.getStatusOfSquare(nextPosition)) {
         case OUT_OF_BOARD:
+            board.newTurn();
             throw new ImpossibleActionException("You cannot act in that direction, it is out of the board!");
         case EMPTY:
             currentPawn.move(nextPosition);
