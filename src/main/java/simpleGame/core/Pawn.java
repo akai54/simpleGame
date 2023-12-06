@@ -79,7 +79,7 @@ public class Pawn {
         this.letter = n;
         this.position = new Position(x, y);
         this.board = board;
-        this.hitpoints = 2;
+        this.hitpoints = 6;
         this.gold = 0;
     }
 
