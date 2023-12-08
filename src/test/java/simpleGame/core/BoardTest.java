@@ -102,11 +102,30 @@ class BoardTest {
     @Test
     void testNewTurn() {
         Board board = new Board(3, 5, 5, 0, 0);
-        Pawn firstPawn = board.getCurrentPawn();
+        Pawn pawn1 = board.getCurrentPawn();
 
         board.newTurn();
-        Pawn secondPawn = board.getCurrentPawn();
+        Pawn pawn2 = board.getCurrentPawn();
 
-        assertNotEquals(firstPawn, secondPawn);
+        assertNotEquals(pawn1, pawn2);
+    }
+
+    @Test
+    public void testSquareContentSprite() {
+        Board board = new Board(1, 5, 5, 2, 2);
+        Pawn pawn = new Pawn('A', 1, 1, board);
+        board.addPawn(pawn);
+
+
+        String pawn1 = board.squareContentSprite(new Position(1, 1));
+        assertEquals("A", pawn1);
+
+
+        String caseVide = board.squareContentSprite(new Position(0, 0));
+        assertEquals("⋅", caseVide);
+
+        /* Test pour une case bonus */
+        String caseBonus = board.squareContentSprite(new Position(2, 2));
+        assertEquals("\u001B[33m#\u001B[m", caseBonus);
     }
 }

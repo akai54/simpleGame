@@ -7,7 +7,7 @@
 - [x] **Test IsBonusSquare** : Vérifiez si la méthode identifie avec précision le carré bonus.
 - [x] **Test NumberOfPawns** : Vérifiez le nombre de pions sur le plateau après diverses opérations comme l'ajout ou la suppression de pions.
 - [x] **Test NewTurn** : Assurez-vous que le jeu met correctement à jour le pion actuel après chaque tour.
-- [ ] **Test SquareContentSprite** : Testez la représentation visuelle des différentes cases du plateau (y compris les cases bonus et les cases avec pions).
+- [x] **Test SquareContentSprite** : Testez la représentation visuelle des différentes cases du plateau (y compris les cases bonus et les cases avec pions).
 - [ ] **Test ToString** : Vérifiez la représentation correcte des chaînes de l'ensemble de la carte.
 - [ ] **Test GetStatusOfSquare** : Testez différents statuts de carrés (occupés, vides, hors du tableau).
 - [ ] **Test GetCurrentPawn** : Vérifiez que la méthode renvoie correctement le pion actuel.
