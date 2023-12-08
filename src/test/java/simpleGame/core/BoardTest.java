@@ -100,6 +100,13 @@ class BoardTest {
     }
 
     @Test
-    void getCurrentPawn() {
+    void testNewTurn() {
+        Board board = new Board(3, 5, 5, 0, 0);
+        Pawn firstPawn = board.getCurrentPawn();
+
+        board.newTurn();
+        Pawn secondPawn = board.getCurrentPawn();
+
+        assertNotEquals(firstPawn, secondPawn);
     }
 }
