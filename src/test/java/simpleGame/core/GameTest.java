@@ -1,5 +1,6 @@
 package simpleGame.core;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import simpleGame.core.Game;
@@ -9,10 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
 
+    private Game game;
+
+    @BeforeEach
+    void init() {
+         game = new Game();
+    }
+
     @Test
     @DisplayName("Constructeur")
     void testGameConstructeur() {
-        Game game = new Game();
 
         assertEquals(2, game.board.numberOfPawns());
         assertEquals(4, game.board.getXSize());
@@ -22,8 +29,6 @@ class GameTest {
     @Test
     @DisplayName("isGameOver avec un pion restant")
     void testIsGameOver1Pawn() {
-        Game game = new Game();
-
         assertFalse(game.isGameOver());
 
         game.board.removePawn(game.board.getCurrentPawn());
@@ -34,8 +39,6 @@ class GameTest {
     @Test
     @DisplayName("isGameOver avec 3 pièces d'or")
     void testIsGameOver3Gold() {
-        Game game = new Game();
-
         assertFalse(game.isGameOver());
 
         game.board.getCurrentPawn().setGold(3);
