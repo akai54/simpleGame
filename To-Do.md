@@ -9,8 +9,8 @@
 - [x] **Test NewTurn** : Assurez-vous que le jeu met correctement à jour le pion actuel après chaque tour.
 - [x] **Test SquareContentSprite** : Testez la représentation visuelle des différentes cases du plateau (y compris les cases bonus et les cases avec pions).
 - [ ] **Test ToString** : Vérifiez la représentation correcte des chaînes de l'ensemble de la carte.
-- [ ] **Test GetStatusOfSquare** : Testez différents statuts de carrés (occupés, vides, hors du tableau).
-- [ ] **Test GetCurrentPawn** : Vérifiez que la méthode renvoie correctement le pion actuel.
+- [x] **Test GetStatusOfSquare** : Testez différents statuts de carrés (occupés, vides, hors du tableau).
+- [x] **Test GetCurrentPawn** : Vérifiez que la méthode renvoie correctement le pion actuel.
 - [x] **Test addPawn(Pawn pawn)** : Assurez-vous que les pions sont correctement ajoutés au plateau.
 - [x] **Test removeAllPawns()** : Vérifiez que tous les pions sont correctement retirés du plateau.
 - [ ] **Tests squareContentSprite(Position p)** : Assurez-vous que les différentes représentations de carrés sont correctes.

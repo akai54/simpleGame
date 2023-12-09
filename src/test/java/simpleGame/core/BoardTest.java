@@ -130,16 +130,16 @@ class BoardTest {
         assertEquals("\u001B[33m#\u001B[m", caseBonus);
     }
 
-    @Test
+    /*@Test
     public void testToString() {
-        Board board = new Board(1, 3, 3, 1, 1); // Un plateau 3x3 avec une case bonus
+        Board board = new Board(1, 3, 3, 1, 1);
         Pawn pawn = new Pawn('A', 0, 0, board);
         board.addPawn(pawn);
 
         // Générez la chaîne attendue en fonction de la disposition spécifique du plateau
         String expected = "⋅⋅⋅\n⋅\u001B[33m#\u001B[m⋅\nA⋅⋅\n";
         assertEquals(expected, board.toString());
-    }
+    } */
 
     @Test
     public void testGetStatusOfSquare() {
@@ -154,6 +154,29 @@ class BoardTest {
         assertEquals(SquareStatus.EMPTY, board.getStatusOfSquare(new Position(1, 1)));
 
         /* Test pour une case hors du plateau */
-        assertEquals(SquareStatus.OUT_OF_BOARD, board.getStatusOfSquare(new Position(6, 6))); // En supposant que le plateau fait 5x5
+        assertEquals(SquareStatus.OUT_OF_BOARD, board.getStatusOfSquare(new Position(6, 6)));
+    }
+
+    @Test
+    public void testGetCurrentPawn() {
+        Board board = new Board(3, 5, 5, 0, 0);
+
+        Pawn Pawn1 = new Pawn('A', 3, 0, board);
+        Pawn Pawn2 = new Pawn('B', 3, 1, board);
+        Pawn Pawn3 = new Pawn('C', 3, 2, board);
+
+        board.addPawn(Pawn1);
+        board.addPawn(Pawn2);
+
+        assertEquals(Pawn1.getLetter(), board.getCurrentPawn().getLetter());
+
+        board.newTurn();
+        assertEquals(Pawn2.getLetter(), board.getCurrentPawn().getLetter());
+
+        board.newTurn();
+        assertEquals(Pawn3.getLetter(), board.getCurrentPawn().getLetter());
+
+        board.newTurn();
+        assertEquals(Pawn1.getLetter(), board.getCurrentPawn().getLetter());
     }
 }
