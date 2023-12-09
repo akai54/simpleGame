@@ -18,4 +18,26 @@ class GameTest {
         assertEquals(4, game.board.getXSize());
         assertEquals(4, game.board.getYSize());
     }
+
+    @Test
+    @DisplayName("isGameOver avec un pion restant")
+    void testIsGameOver1Pawn() {
+        Game game = new Game();
+
+        assertFalse(game.isGameOver());
+
+        game.board.removePawn(game.board.getCurrentPawn());
+
+        assertTrue(game.isGameOver());
+    }
+
+    @Test
+    @DisplayName("isGameOver avec 3 pièces d'or")
+    void testIsGameOver3Gold() {
+        Game game = new Game();
+
+        assertFalse(game.isGameOver());
+
+
+    }
 }
