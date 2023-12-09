@@ -18,7 +18,7 @@
 - [x] **Test des valeurs de l'énumération** : Vérifiez que l'énumération Direction contient les valeurs correctes (Up, Down, Left, Right).
 
 ### Game
-- [ ] **Test du constructeur** : Vérifiez que le constructeur du jeu initialise un plateau avec les dimensions et le nombre de pions corrects.
+- [x] **Test du constructeur** : Vérifiez que le constructeur du jeu initialise un plateau avec les dimensions et le nombre de pions corrects.
 - [ ] **Test GameOver** : Testez la méthode isGameOver avec des scénarios comme un pion restant, un pion avec 3 pièces d'or ou plus et des conditions de jeu normales.
 - [ ] **Test ToString** : Vérifiez que la méthode toString renvoie la représentation sous forme de chaîne correcte de la carte.
 - [ ] **Tests PlayRound** :
