@@ -3,8 +3,8 @@ package simpleGame.core;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import simpleGame.core.Game;
-import simpleGame.core.Board;
+import simpleGame.core.Pawn;
+import simpleGame.exception.ImpossibleActionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,5 +43,18 @@ class GameTest {
         game.board.getCurrentPawn().setGold(3);
 
         assertTrue(game.isGameOver());
+    }
+
+    @Test
+    @DisplayName("Test de playRound avec déplacement valide")
+    void testPlayRoundValidMove() throws ImpossibleActionException {
+        Pawn pawn1 = new Pawn( 'a', 0, 1, game.board);
+        Pawn pawn2 = new Pawn( 'b', 1, 1, game.board);
+
+        game.board.removePawn(game.board.getCurrentPawn());
+        game.board.addPawn(pawn1);
+        game.board.removePawn(game.board.getCurrentPawn());
+        game.board.addPawn(pawn2);
+        assertDoesNotThrow(() -> game.playRound(Direction.Right));
     }
 }
