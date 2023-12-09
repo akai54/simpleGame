@@ -21,10 +21,9 @@
 - [x] **Test du constructeur** : Vérifiez que le constructeur du jeu initialise un plateau avec les dimensions et le nombre de pions corrects.
 - [x] **Test GameOver** : Testez la méthode isGameOver avec des scénarios comme un pion restant, un pion avec 3 pièces d'or ou plus et des conditions de jeu normales.
 - [ ] **Tests PlayRound** :
-    - [ ] Déplacement valide : testez playRound avec une direction valide où le pion se déplace vers une case vide.
-    - [ ] Attaque valide : testez le playRound où le pion attaque un autre pion.
-    - [ ] Déplacement invalide (hors tableau) : testez playRound avec une direction sortant du tableau, en attendant une ImpossibleActionException.
-    - [ ] Déplacement invalide (carré occupé) : testez playRound en essayant de vous déplacer vers une case occupée, en attendant une ImpossibleActionException.
+    - [x] Déplacement valide : testez playRound avec une direction valide où le pion se déplace vers une case vide.
+    - [x] Attaque valide : testez le playRound où le pion attaque un autre pion.
+    - [x] Déplacement invalide (hors tableau) : testez playRound avec une direction sortant du tableau, en attendant une ImpossibleActionException.
 
 ### Pawn
 - [ ] **Test du constructeur** : Vérifiez qu'un nouveau pion est correctement initialisé avec la lettre, la position, les points de vie et l'or spécifiés.

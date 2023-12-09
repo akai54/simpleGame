@@ -46,15 +46,30 @@ class GameTest {
     }
 
     @Test
-    @DisplayName("Test de playRound avec déplacement valide")
-    void testPlayRoundValidMove() throws ImpossibleActionException {
-        Pawn pawn1 = new Pawn( 'a', 0, 1, game.board);
-        Pawn pawn2 = new Pawn( 'b', 1, 1, game.board);
+    @DisplayName("Test de playRound avec un déplacement valide")
+    void testPlayRoundValidMove() {
+        Pawn pawn1 = new Pawn( 'A', 1, 1, game.board);
+        Pawn pawn2 = new Pawn( 'B', 2, 1, game.board);
 
         game.board.removePawn(game.board.getCurrentPawn());
         game.board.addPawn(pawn1);
         game.board.removePawn(game.board.getCurrentPawn());
         game.board.addPawn(pawn2);
         assertDoesNotThrow(() -> game.playRound(Direction.Right));
+    }
+
+    @Test
+    @DisplayName("Test de playRound avec un déplacement invalide")
+    void testPlayRoundInvalidMove() throws ImpossibleActionException {
+        Pawn pawn1 = new Pawn( 'A', 0, 1, game.board);
+        Pawn pawn2 = new Pawn( 'B', 2, 3, game.board);
+
+        game.board.removePawn(game.board.getCurrentPawn());
+        game.board.addPawn(pawn1);
+        game.board.removePawn(game.board.getCurrentPawn());
+        game.board.addPawn(pawn2);
+        assertThrows(ImpossibleActionException.class, () -> {
+            game.playRound(Direction.Left);
+        });
     }
 }
