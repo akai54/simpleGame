@@ -68,6 +68,13 @@ public class Pawn {
     }
 
     /**
+     * Set the amount of gold of the pawn.
+     */
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    /**
      * Create a Pawn with 2 hitpoints and 0 gold.
      * 
      * @param n     The letter that represents the pawn.
