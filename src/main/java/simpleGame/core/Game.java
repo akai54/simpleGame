@@ -14,7 +14,7 @@ public class Game {
     /**
      * The board of the game
      */
-    private Board board;
+    public Board board;
 
     /**
      * Constructs a Game with a Board containing 2 pawns on a 4x4 board.

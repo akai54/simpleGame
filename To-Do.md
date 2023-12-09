@@ -13,7 +13,6 @@
 - [x] **Test GetCurrentPawn** : Vérifiez que la méthode renvoie correctement le pion actuel.
 - [x] **Test addPawn(Pawn pawn)** : Assurez-vous que les pions sont correctement ajoutés au plateau.
 - [x] **Test removeAllPawns()** : Vérifiez que tous les pions sont correctement retirés du plateau.
-- [x] **Tests squareContentSprite(Position p)** : Assurez-vous que les différentes représentations de carrés sont correctes.
 
 ### Direction
 - [x] **Test des valeurs de l'énumération** : Vérifiez que l'énumération Direction contient les valeurs correctes (Up, Down, Left, Right).
