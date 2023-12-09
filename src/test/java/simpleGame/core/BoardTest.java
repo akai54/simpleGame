@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import simpleGame.core.Board.SquareStatus;
 
 class BoardTest {
 
@@ -127,5 +128,32 @@ class BoardTest {
         /* Test pour une case bonus */
         String caseBonus = board.squareContentSprite(new Position(2, 2));
         assertEquals("\u001B[33m#\u001B[m", caseBonus);
+    }
+
+    @Test
+    public void testToString() {
+        Board board = new Board(1, 3, 3, 1, 1); // Un plateau 3x3 avec une case bonus
+        Pawn pawn = new Pawn('A', 0, 0, board);
+        board.addPawn(pawn);
+
+        // Générez la chaîne attendue en fonction de la disposition spécifique du plateau
+        String expected = "⋅⋅⋅\n⋅\u001B[33m#\u001B[m⋅\nA⋅⋅\n";
+        assertEquals(expected, board.toString());
+    }
+
+    @Test
+    public void testGetStatusOfSquare() {
+        Board board = new Board(1, 5, 5, 0, 0);
+        Pawn pawn = new Pawn('A', 2, 3, board);
+        board.addPawn(pawn);
+
+        /* Test pour une case occupée */
+        assertEquals(SquareStatus.OCCUPIED, board.getStatusOfSquare(new Position(2, 3)));
+
+        /* Test pour une case vide */
+        assertEquals(SquareStatus.EMPTY, board.getStatusOfSquare(new Position(1, 1)));
+
+        /* Test pour une case hors du plateau */
+        assertEquals(SquareStatus.OUT_OF_BOARD, board.getStatusOfSquare(new Position(6, 6))); // En supposant que le plateau fait 5x5
     }
 }
