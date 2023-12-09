@@ -38,6 +38,8 @@ class GameTest {
 
         assertFalse(game.isGameOver());
 
+        game.board.getCurrentPawn().setGold(3);
 
+        assertTrue(game.isGameOver());
     }
 }
