@@ -25,7 +25,6 @@
     - [ ] Attaque valide : testez le playRound où le pion attaque un autre pion.
     - [ ] Déplacement invalide (hors tableau) : testez playRound avec une direction sortant du tableau, en attendant une ImpossibleActionException.
     - [ ] Déplacement invalide (carré occupé) : testez playRound en essayant de vous déplacer vers une case occupée, en attendant une ImpossibleActionException.
-- [ ] **Tests pour la méthode getCurrentPawn()** : Vérifiez que le pion actuel est correctement retourné à chaque tour.
 
 ### Pawn
 - [ ] **Test du constructeur** : Vérifiez qu'un nouveau pion est correctement initialisé avec la lettre, la position, les points de vie et l'or spécifiés.

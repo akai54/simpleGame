@@ -20,7 +20,6 @@ class GameTest {
     @Test
     @DisplayName("Constructeur")
     void testGameConstructeur() {
-
         assertEquals(2, game.board.numberOfPawns());
         assertEquals(4, game.board.getXSize());
         assertEquals(4, game.board.getYSize());
