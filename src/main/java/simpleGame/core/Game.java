@@ -14,7 +14,7 @@ public class Game {
     /**
      * The board of the game
      */
-    public Board board;
+    private Board board;
 
     /**
      * Constructs a Game with a Board containing 2 pawns on a 4x4 board.
@@ -75,6 +75,10 @@ public class Game {
 
         board.newTurn();
 
+    }
+
+    public Board getBoard() {
+        return board;
     }
 
 }
