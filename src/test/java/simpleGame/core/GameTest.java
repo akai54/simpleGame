@@ -11,18 +11,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameTest {
 
     private Game game;
+    private Board board;
 
     @BeforeEach
     void init() {
-         game = new Game();
+        game = new Game();
+        board = game.getBoard();
     }
 
     @Test
     @DisplayName("Constructeur")
     void testGameConstructeur() {
-        assertEquals(2, game.board.numberOfPawns());
-        assertEquals(4, game.board.getXSize());
-        assertEquals(4, game.board.getYSize());
+        assertEquals(2, board.numberOfPawns());
+        assertEquals(4, board.getXSize());
+        assertEquals(4, board.getYSize());
     }
 
     @Test
@@ -30,7 +32,7 @@ class GameTest {
     void testIsGameOver1Pawn() {
         assertFalse(game.isGameOver());
 
-        game.board.removePawn(game.board.getCurrentPawn());
+        board.removePawn(board.getCurrentPawn());
 
         assertTrue(game.isGameOver());
     }
@@ -40,7 +42,7 @@ class GameTest {
     void testIsGameOver3Gold() {
         assertFalse(game.isGameOver());
 
-        game.board.getCurrentPawn().setGold(3);
+        board.getCurrentPawn().setGold(3);
 
         assertTrue(game.isGameOver());
     }
@@ -48,26 +50,26 @@ class GameTest {
     @Test
     @DisplayName("Test de playRound avec un déplacement valide")
     void testPlayRoundValidMove() {
-        Pawn pawn1 = new Pawn( 'A', 1, 1, game.board);
-        Pawn pawn2 = new Pawn( 'B', 2, 1, game.board);
+        Pawn pawn1 = new Pawn( 'A', 1, 1, board);
+        Pawn pawn2 = new Pawn( 'B', 2, 1, board);
 
-        game.board.removePawn(game.board.getCurrentPawn());
-        game.board.addPawn(pawn1);
-        game.board.removePawn(game.board.getCurrentPawn());
-        game.board.addPawn(pawn2);
+        board.removePawn(board.getCurrentPawn());
+        board.addPawn(pawn1);
+        board.removePawn(board.getCurrentPawn());
+        board.addPawn(pawn2);
         assertDoesNotThrow(() -> game.playRound(Direction.Right));
     }
 
     @Test
     @DisplayName("Test de playRound avec un déplacement invalide")
     void testPlayRoundInvalidMove() throws ImpossibleActionException {
-        Pawn pawn1 = new Pawn( 'A', 0, 1, game.board);
-        Pawn pawn2 = new Pawn( 'B', 2, 3, game.board);
+        Pawn pawn1 = new Pawn( 'A', 0, 1, board);
+        Pawn pawn2 = new Pawn( 'B', 2, 3, board);
 
-        game.board.removePawn(game.board.getCurrentPawn());
-        game.board.addPawn(pawn1);
-        game.board.removePawn(game.board.getCurrentPawn());
-        game.board.addPawn(pawn2);
+        board.removePawn(board.getCurrentPawn());
+        board.addPawn(pawn1);
+        board.removePawn(board.getCurrentPawn());
+        board.addPawn(pawn2);
         assertThrows(ImpossibleActionException.class, () -> {
             game.playRound(Direction.Left);
         });
