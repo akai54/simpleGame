@@ -1,19 +1,27 @@
 package simpleGame.core;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import simpleGame.core.Board.SquareStatus;
 
-class BoardTest {
+class boardtest {
+
+    private Board board;
+
+    @BeforeEach
+    void init() {
+        board = new Board(2, 4, 4, 3, 4);
+    }
 
     @Test
-    @DisplayName("Test Constructeur")
+    @DisplayName("Test du Constructeur du Board")
     void testBoardConstruct() {
-        Board board = new Board(2,4,4,3,4);
         /* Test position case bonus */
         assertEquals(board.getBonusSquare(), new Position(3,4));
+
         /* Test dimensions du plateau */
         assertEquals(board.getXSize(), 4);
         assertEquals(board.getYSize(), 4);
@@ -21,7 +29,6 @@ class BoardTest {
 
     @Test
     void testAddPawn() {
-        Board board = new Board(2,4,4,3,4);
         /* On s'assure que la position où il y aura pawn est vide et renvoi Null pour l'instant */
         assertNull(board.getSquareContent(new Position(3,3)));
         /* On ajoute pawn à la meme position d'en haut */
@@ -34,7 +41,6 @@ class BoardTest {
 
     @Test
     void testGetSquareContent() {
-        Board board = new Board(2,4,4,3,4);
         Pawn pawn = new Pawn('E', 3, 4, board);
 
         /* On suppose que addPawn() ajoute un pion au plateau correctement */
@@ -50,7 +56,6 @@ class BoardTest {
 
     @Test
     void removePawn() {
-        Board board = new Board(2,4,4,3,4);
         /* On s'assure que la position où il y aura pawn est vide et renvoi Null pour l'instant */
         assertNull(board.getSquareContent(new Position(1,1)));
 
@@ -69,64 +74,60 @@ class BoardTest {
 
     @Test
     void testIsBonusSquare() {
-        Board board = new Board(2,4,4,3,4);
-
         assertTrue(board.isBonusSquare(new Position(3,4)));
         assertFalse(board.isBonusSquare(new Position(1,1)));
     }
 
     @Test
     void numberOfPawns() {
-        Board board = new Board(2,4,4,3,4);
-
         assertEquals(2, board.numberOfPawns());
     }
 
     @Test
     void testRemoveAllPawns() {
-        Board board = new Board(2,5,5,3,4);
-        Pawn pawn1 = new Pawn('E', 4, 4, board);
-        Pawn pawn2 = new Pawn('Z', 4, 1, board);
+        Board boardRemoveAllPawns = new Board(2,5,5,3,4);
+        Pawn pawn1 = new Pawn('E', 4, 4, boardRemoveAllPawns);
+        Pawn pawn2 = new Pawn('Z', 4, 1, boardRemoveAllPawns);
 
-        board.addPawn(pawn1);
-        board.addPawn(pawn2);
+        boardRemoveAllPawns.addPawn(pawn1);
+        boardRemoveAllPawns.addPawn(pawn2);
 
-        assertEquals(pawn1, board.getSquareContent(new Position(4,4)));
-        assertEquals(pawn2, board.getSquareContent(new Position(4,1)));
+        assertEquals(pawn1, boardRemoveAllPawns.getSquareContent(new Position(4,4)));
+        assertEquals(pawn2, boardRemoveAllPawns.getSquareContent(new Position(4,1)));
 
-        board.removeAllPawns();
+        boardRemoveAllPawns.removeAllPawns();
 
-        assertNull(board.getSquareContent(new Position(4,4)));
-        assertNull(board.getSquareContent(new Position(4,1)));
+        assertNull(boardRemoveAllPawns.getSquareContent(new Position(4,4)));
+        assertNull(boardRemoveAllPawns.getSquareContent(new Position(4,1)));
     }
 
     @Test
     void testNewTurn() {
-        Board board = new Board(3, 5, 5, 0, 0);
-        Pawn pawn1 = board.getCurrentPawn();
+        Board boardNewTurn = new Board(3, 5, 5, 0, 0);
+        Pawn pawn1 = boardNewTurn.getCurrentPawn();
 
-        board.newTurn();
-        Pawn pawn2 = board.getCurrentPawn();
+        boardNewTurn.newTurn();
+        Pawn pawn2 = boardNewTurn.getCurrentPawn();
 
         assertNotEquals(pawn1, pawn2);
     }
 
     @Test
     public void testSquareContentSprite() {
-        Board board = new Board(1, 5, 5, 2, 2);
-        Pawn pawn = new Pawn('A', 1, 1, board);
-        board.addPawn(pawn);
+        Board boardContentSprite = new Board(1, 5, 5, 2, 2);
+        Pawn pawn = new Pawn('A', 1, 1, boardContentSprite);
+        boardContentSprite.addPawn(pawn);
 
 
-        String pawn1 = board.squareContentSprite(new Position(1, 1));
+        String pawn1 = boardContentSprite.squareContentSprite(new Position(1, 1));
         assertEquals("A", pawn1);
 
 
-        String caseVide = board.squareContentSprite(new Position(0, 0));
+        String caseVide = boardContentSprite.squareContentSprite(new Position(0, 0));
         assertEquals("⋅", caseVide);
 
         /* Test pour une case bonus */
-        String caseBonus = board.squareContentSprite(new Position(2, 2));
+        String caseBonus = boardContentSprite.squareContentSprite(new Position(2, 2));
         assertEquals("\u001B[33m#\u001B[m", caseBonus);
     }
 
@@ -143,40 +144,40 @@ class BoardTest {
 
     @Test
     public void testGetStatusOfSquare() {
-        Board board = new Board(1, 5, 5, 0, 0);
-        Pawn pawn = new Pawn('A', 2, 3, board);
-        board.addPawn(pawn);
+        Board boardGetStatusOfSquare = new Board(1, 5, 5, 0, 0);
+        Pawn pawn = new Pawn('A', 2, 3, boardGetStatusOfSquare);
+        boardGetStatusOfSquare.addPawn(pawn);
 
         /* Test pour une case occupée */
-        assertEquals(SquareStatus.OCCUPIED, board.getStatusOfSquare(new Position(2, 3)));
+        assertEquals(SquareStatus.OCCUPIED, boardGetStatusOfSquare.getStatusOfSquare(new Position(2, 3)));
 
         /* Test pour une case vide */
-        assertEquals(SquareStatus.EMPTY, board.getStatusOfSquare(new Position(1, 1)));
+        assertEquals(SquareStatus.EMPTY, boardGetStatusOfSquare.getStatusOfSquare(new Position(1, 1)));
 
         /* Test pour une case hors du plateau */
-        assertEquals(SquareStatus.OUT_OF_BOARD, board.getStatusOfSquare(new Position(6, 6)));
+        assertEquals(SquareStatus.OUT_OF_BOARD, boardGetStatusOfSquare.getStatusOfSquare(new Position(6, 6)));
     }
 
     @Test
     public void testGetCurrentPawn() {
-        Board board = new Board(3, 5, 5, 0, 0);
+        Board boardGetCurrentPawn = new Board(3, 5, 5, 0, 0);
 
-        Pawn Pawn1 = new Pawn('A', 3, 0, board);
-        Pawn Pawn2 = new Pawn('B', 3, 1, board);
-        Pawn Pawn3 = new Pawn('C', 3, 2, board);
+        Pawn Pawn1 = new Pawn('A', 3, 0, boardGetCurrentPawn);
+        Pawn Pawn2 = new Pawn('B', 3, 1, boardGetCurrentPawn);
+        Pawn Pawn3 = new Pawn('C', 3, 2, boardGetCurrentPawn);
 
-        board.addPawn(Pawn1);
-        board.addPawn(Pawn2);
+        boardGetCurrentPawn.addPawn(Pawn1);
+        boardGetCurrentPawn.addPawn(Pawn2);
 
-        assertEquals(Pawn1.getLetter(), board.getCurrentPawn().getLetter());
+        assertEquals(Pawn1.getLetter(), boardGetCurrentPawn.getCurrentPawn().getLetter());
 
-        board.newTurn();
-        assertEquals(Pawn2.getLetter(), board.getCurrentPawn().getLetter());
+        boardGetCurrentPawn.newTurn();
+        assertEquals(Pawn2.getLetter(), boardGetCurrentPawn.getCurrentPawn().getLetter());
 
-        board.newTurn();
-        assertEquals(Pawn3.getLetter(), board.getCurrentPawn().getLetter());
+        boardGetCurrentPawn.newTurn();
+        assertEquals(Pawn3.getLetter(), boardGetCurrentPawn.getCurrentPawn().getLetter());
 
-        board.newTurn();
-        assertEquals(Pawn1.getLetter(), board.getCurrentPawn().getLetter());
+        boardGetCurrentPawn.newTurn();
+        assertEquals(Pawn1.getLetter(), boardGetCurrentPawn.getCurrentPawn().getLetter());
     }
 }
