@@ -50,6 +50,40 @@
 			  </execution>
 			</executions>
 		  </plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.11</version>
+				<executions>
+
+					<!-- Active l'agent JaCoCo -->
+					<execution>
+						<id>prepare-agent-exe</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+
+					<!-- Génère un rapport HTML -->
+					<execution>
+						<id>report-exe</id>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<!-- Normalement maven-site-plugin est chargé par défaut par maven -->
+			<!-- Mais c'est ici nécessaire car jacoco nécessite une version récente -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.12.1</version>
+			</plugin>
 		  
 		</plugins>
 	  </build>
