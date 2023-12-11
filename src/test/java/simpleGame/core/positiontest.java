@@ -4,9 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static simpleGame.core.Direction.Right;
 
-class PositionTest {
+class positiontest {
 
     @Test
     @DisplayName("Constructor correctly initialized")

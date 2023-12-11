@@ -3,12 +3,11 @@ package simpleGame.core;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import simpleGame.core.Pawn;
 import simpleGame.exception.ImpossibleActionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GameTest {
+class gametest {
 
     private Game game;
     private Board board;
