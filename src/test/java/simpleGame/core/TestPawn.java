@@ -24,6 +24,7 @@ class TestPawn {
     @DisplayName("Constructor correctly initialized")
     void testPawnConstructor() {
         Pawn pawn = new Pawn( 'c', 1, 1, board);
+        board.addPawn(pawn);
 
         assertEquals(pawn.getLetter(), 'c');
         assertEquals(pawn.getGold(), 0);
@@ -35,9 +36,12 @@ class TestPawn {
     @DisplayName("Test if the move function works as intended")
     void testMove() throws ImpossibleActionException{
         Pawn pawn0 = new Pawn( 'c', 0, 1, board);
+        board.addPawn(pawn0);
         Position pos0 = new Position(0,0);
+
         Pawn pawn1 = new Pawn( 'c', 3, 4, board);
         Position pos1 = new Position(4,4);
+        board.addPawn(pawn1);
 
         //test lower corner
         pawn0.move(pos0);
@@ -52,20 +56,23 @@ class TestPawn {
     @DisplayName("Test if the move function returns ImpossibleActionException")
     void testMoveException() throws ImpossibleActionException{
         Pawn pawn0 = new Pawn( 'c', 0, 0, board);
-        Pawn pawn1 = new Pawn( 'c', 5, 4, board);
+        Pawn pawn1 = new Pawn( 'c', 4, 4, board);
+        board.addPawn(pawn0);
+        board.addPawn(pawn1);
 
         //when out of the grid
         assertThrows(ImpossibleActionException.class, () -> pawn0.move(new Position(-1,0)));
         assertThrows(ImpossibleActionException.class, () -> pawn0.move(new Position(0,-1)));
-        assertThrows(ImpossibleActionException.class, () -> pawn1.move(new Position(5,5)));
-        assertThrows(ImpossibleActionException.class, () -> pawn1.move(new Position(6,5)));
+        assertThrows(ImpossibleActionException.class, () -> pawn1.move(new Position(5,4)));
+        assertThrows(ImpossibleActionException.class, () -> pawn1.move(new Position(4,5)));
 
         //when the new position is not adjacent
         assertThrows(ImpossibleActionException.class, () -> pawn0.move(new Position(1,1)));
 
         //when the Position is already taken
         Pawn pawn3 = new Pawn( 'c', 3, 4, board);
-        assertThrows(ImpossibleActionException.class, () -> pawn0.move(new Position(3,4)));
+        board.addPawn(pawn3);
+        assertThrows(ImpossibleActionException.class, () -> pawn1.move(new Position(3,4)));
     }
 
     @Test
@@ -94,9 +101,12 @@ class TestPawn {
 
         //Test if hitpoints get below 0
         Pawn pawnB = new Pawn( 'B', 1, 0, board);
+        board.addPawn(pawnB);
+        assertEquals(1, board.numberOfPawns());
 
         pawnB.suffer(7);
         assertTrue(pawnB.isDead());
+        assertEquals(0, board.numberOfPawns());
     }
 
     @Test

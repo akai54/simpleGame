@@ -31,6 +31,7 @@
     - [X] Déplacement valide : testez le déplacement du pion vers une case vide adjacente.
     - [X] Déplacement invalide (hors plateau/occupé/trop loin) : testez le déplacement vers une case qui est hors du plateau, déjà occupée ou non adjacente, en attendant une ImpossibleActionException.
 - [X] **Test de suffer** : Testez la méthode suffer pour vous assurer qu'elle réduit correctement les points de vie et gère la mort des pions.
+    - [X] Remove from Board : Vérifier qu'un pion mort est enlevé du plateau
 - [X] **Test IsDead** : Vérifiez qu'isDead identifie correctement le moment où les points de vie d'un pion atteignent zéro.
 - [X] **Tests d'attaque** :
     - [X] Attaque valide (case normale et case bonus) : Testez l'attaque d'un autre pion dans des conditions normales et depuis une case bonus.
