@@ -187,7 +187,7 @@ public class Board {
             if (isBonusSquare(p)) {
                 result = StringColoring.colorString('#', GameColor.YELLOW);
             } else
-                result = "⋅";
+                result = ".";
         } else {
             if (content == currentPawn) {
                 if (isBonusSquare(p)) {

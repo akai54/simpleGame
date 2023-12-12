@@ -40,6 +40,12 @@ class TestBoard {
         /* On vérifie que cette fois la meme position renvoi bien le pawn et non pas Null */
         assertEquals(pawn, board.getSquareContent(new Position(3,3)));
         assertNotNull(board.getSquareContent(new Position(3,3)));
+
+
+        /* On cherche maintenant à s'assurer qu'on ne peux pas écraser un pion déjà présent */
+        Pawn pawn2 = new Pawn('F', 3, 3, board);
+        board.addPawn(pawn2);
+        assertEquals(pawn, board.getSquareContent(new Position(3,3)));
     }
 
     @Test
@@ -136,7 +142,7 @@ class TestBoard {
 
 
         String caseVide = boardContentSprite.squareContentSprite(new Position(0, 0));
-        assertEquals("⋅", caseVide);
+        assertEquals(".", caseVide);
 
         /* Test pour une case bonus */
         String caseBonus = boardContentSprite.squareContentSprite(new Position(2, 2));
