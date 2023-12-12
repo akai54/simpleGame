@@ -152,10 +152,14 @@ class TestBoard {
         assertEquals(SquareStatus.OCCUPIED, boardGetStatusOfSquare.getStatusOfSquare(new Position(2, 3)));
 
         /* Test pour une case vide */
-        assertEquals(SquareStatus.EMPTY, boardGetStatusOfSquare.getStatusOfSquare(new Position(1, 1)));
+        assertEquals(SquareStatus.EMPTY, boardGetStatusOfSquare.getStatusOfSquare(new Position(0, 0)));
+        assertEquals(SquareStatus.EMPTY, boardGetStatusOfSquare.getStatusOfSquare(new Position(4, 4)));
 
         /* Test pour une case hors du plateau */
-        assertEquals(SquareStatus.OUT_OF_BOARD, boardGetStatusOfSquare.getStatusOfSquare(new Position(6, 6)));
+        assertEquals(SquareStatus.OUT_OF_BOARD, boardGetStatusOfSquare.getStatusOfSquare(new Position(2, 5)));
+        assertEquals(SquareStatus.OUT_OF_BOARD, boardGetStatusOfSquare.getStatusOfSquare(new Position(5, 2)));
+        assertEquals(SquareStatus.OUT_OF_BOARD, boardGetStatusOfSquare.getStatusOfSquare(new Position(2, -1)));
+        assertEquals(SquareStatus.OUT_OF_BOARD, boardGetStatusOfSquare.getStatusOfSquare(new Position(-1, 2)));
     }
 
     @Test

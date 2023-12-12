@@ -254,7 +254,7 @@ public class Board {
         int x = p.getX();
         int y = p.getY();
 
-        if (y <= this.getYSize() && x <= this.getXSize() && y >= 0 && x >= 0) {
+        if (y < this.getYSize() && x < this.getXSize() && y >= 0 && x >= 0) {
             Pawn content = this.getSquareContent(p);
             if (content == null) {
                 return SquareStatus.EMPTY;
