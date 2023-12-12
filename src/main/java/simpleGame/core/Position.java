@@ -83,7 +83,7 @@ public class Position {
      * @return
      */
     public boolean isNextTo(Position otherPosition) {
-        return Math.abs(this.x - otherPosition.x) <= 1 && Math.abs(this.y - otherPosition.y) <= 1;
+        return ((Math.abs(this.x - otherPosition.x) == 1) ^ (Math.abs(this.y - otherPosition.y) == 1));
     }
 
     @Override

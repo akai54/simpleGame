@@ -53,20 +53,25 @@ class TestPosition {
         Position position = new Position(3,4);
 
         /* Test position adjacent */
-        assertTrue(position.isNextTo(new Position(2,3)));
         assertTrue(position.isNextTo(new Position(2,4)));
-        assertTrue(position.isNextTo(new Position(2,5)));
         assertTrue(position.isNextTo(new Position(3,3)));
         assertTrue(position.isNextTo(new Position(3,5)));
-        assertTrue(position.isNextTo(new Position(4,3)));
         assertTrue(position.isNextTo(new Position(4,4)));
-        assertTrue(position.isNextTo(new Position(4,5)));
 
-        /* Test non-adjacent positions */
+        /* Test close non-adjascent positions */
+        assertFalse(position.isNextTo(new Position(2,3)));
+        assertFalse(position.isNextTo(new Position(4,3)));
+        assertFalse(position.isNextTo(new Position(2,5)));
+        assertFalse(position.isNextTo(new Position(4,5)));
+
+        /* Test far non-adjacent positions */
         assertFalse(position.isNextTo(new Position(3, 6)));
         assertFalse(position.isNextTo(new Position(1, 4)));
         assertFalse(position.isNextTo(new Position(5, 4)));
         assertFalse(position.isNextTo(new Position(3, 1)));
+
+        /* Test that self is not adjascent */
+        assertFalse(position.isNextTo(position));
     }
 
     @Test
@@ -81,6 +86,5 @@ class TestPosition {
 
         /* Test deux objets qui ont pas les memes coordonnées */
         assertFalse(position1.equals(position3));
-
     }
 }
