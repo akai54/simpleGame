@@ -70,6 +70,8 @@ class TestGame {
         board.addPawn(pawn1);
         board.removePawn(board.getCurrentPawn());
         board.addPawn(pawn2);
+        board.newTurn();
+        
         assertThrows(ImpossibleActionException.class, () -> {
             game.playRound(Direction.Left);
         });
