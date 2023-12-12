@@ -75,14 +75,21 @@ public class Board {
      * @param yBonus        The y position of the bonus square.
      */
     public Board(int numberOfPawns, int sizeX, int sizeY, int xBonus, int yBonus) {
-        Random random = new Random();
         this.xSize = sizeX;
         this.ySize = sizeY;
         this.bonusSquare = new Position(xBonus, yBonus);
         this.pawns = new ArrayList<Pawn>();
-        for (int i = 1; i <= numberOfPawns; i++) {
-            Pawn pawn = new Pawn(CharUtil.getCharForNumber(i), random.nextInt(xSize), random.nextInt(ySize), this);
-            this.addPawn(pawn);
+
+        int i=1;
+        while(i <= numberOfPawns)
+        {
+            Random random = new Random();
+            Position pos = new Position(random.nextInt(xSize), random.nextInt(ySize));
+            if(this.getSquareContent(pos) == null) { //s'assure que la case est vide
+                Pawn pawn = new Pawn(CharUtil.getCharForNumber(i), pos.getX(), pos.getY(), this);
+                this.addPawn(pawn);
+                i++;
+            }
         }
 
         currentPawn = pawns.get(0);

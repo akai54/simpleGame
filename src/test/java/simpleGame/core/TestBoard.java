@@ -88,7 +88,7 @@ class TestBoard {
     }
 
     @Test
-    void numberOfPawns() {
+    void testNumberOfPawns() {
         assertEquals(2, board.numberOfPawns());
     }
 
@@ -181,7 +181,7 @@ class TestBoard {
     public void testGetCurrentPawn() {
         //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
         board.removeAllPawns();
-        
+
         Board boardGetCurrentPawn = new Board(3, 5, 5, 0, 0);
 
         Pawn Pawn1 = new Pawn('A', 3, 0, boardGetCurrentPawn);
