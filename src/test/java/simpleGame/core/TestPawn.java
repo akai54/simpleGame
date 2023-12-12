@@ -74,7 +74,7 @@ public class TestPawn {
     }
 
     @Test
-    @DisplayName("Test if the pawn take hitpoints and is declared dead")
+    @DisplayName("Test if a pawn taking enough hitpoints is declared dead & is removed from the board")
     void testSufferAndRemove(){
         Board board = new Board(3,5,5, 2, 2);
         Pawn pawn = new Pawn( 'c', 0, 0, board);
@@ -88,10 +88,39 @@ public class TestPawn {
         //Test if hitpoints get below 0
         Pawn pawnB = new Pawn( 'B', 1, 0, board);
 
-        pawn.suffer(7);
+        pawnB.suffer(7);
         assertTrue(pawnB.isDead());
     }
 
+    @Test
+    @DisplayName("Test if attack works as intended")
+    void testAttack() throws ImpossibleActionException{
+        Board board = new Board(3,5,5, 2, 2);
+        Pawn pawn0 = new Pawn( 'c', 2, 2, board); // is on a bonus square
+        Pawn pawn1 = new Pawn( 'd', 2, 1, board);
+        Pawn pawn2 = new Pawn( 'd', 4, 2, board);
+        board.addPawn(pawn0);
+        board.addPawn(pawn1);
+        board.addPawn(pawn2);
+
+        //Attack a nearby ennemy - 1dmg
+        pawn1.attack(new Position(2, 2));
+        assertEquals(5, pawn0.getHitpoints());
+
+        //Attack a nearby ennemy from a bonus square - 2dmg
+        pawn0.attack(new Position(2, 1));
+        assertEquals(4, pawn1.getHitpoints());
+        
+        //suicide test
+        assertThrows(ImpossibleActionException.class, () -> pawn0.attack(new Position(2, 2)));
+
+        //attack an adjacent empty square
+        assertThrows(ImpossibleActionException.class, () -> pawn0.attack(new Position(3, 2)));
+
+        //attack a non-adjacent ennemy
+        assertThrows(ImpossibleActionException.class, () -> pawn0.attack(new Position(4, 2)));
+
+    }
 
     /*
      * Move the pawn to a new position.
