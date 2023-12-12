@@ -26,12 +26,12 @@
     - [x] Déplacement invalide (hors tableau) : testez playRound avec une direction sortant du tableau, en attendant une ImpossibleActionException.
 
 ### Pawn
-- [ ] **Test du constructeur** : Vérifiez qu'un nouveau pion est correctement initialisé avec la lettre, la position, les points de vie et l'or spécifiés.
-- [ ] **Test se Déplacer** :
-    - [ ] Déplacement valide : testez le déplacement du pion vers une case vide adjacente.
-    - [ ] Déplacement invalide (hors plateau/occupé/trop loin) : testez le déplacement vers une case qui est hors du plateau, déjà occupée ou non adjacente, en attendant une ImpossibleActionException.
-- [ ] **Test de suffer** : Testez la méthode suffer pour vous assurer qu'elle réduit correctement les points de vie et gère la mort des pions.
-- [ ] **Test IsDead** : Vérifiez qu'isDead identifie correctement le moment où les points de vie d'un pion atteignent zéro.
+- [X] **Test du constructeur** : Vérifiez qu'un nouveau pion est correctement initialisé avec la lettre, la position, les points de vie et l'or spécifiés.
+- [X] **Test se Déplacer** :
+    - [X] Déplacement valide : testez le déplacement du pion vers une case vide adjacente.
+    - [X] Déplacement invalide (hors plateau/occupé/trop loin) : testez le déplacement vers une case qui est hors du plateau, déjà occupée ou non adjacente, en attendant une ImpossibleActionException.
+- [X] **Test de suffer** : Testez la méthode suffer pour vous assurer qu'elle réduit correctement les points de vie et gère la mort des pions.
+- [X] **Test IsDead** : Vérifiez qu'isDead identifie correctement le moment où les points de vie d'un pion atteignent zéro.
 - [ ] **Tests d'attaque** :
     - [ ] Attaque valide (case normale et case bonus) : Testez l'attaque d'un autre pion dans des conditions normales et depuis une case bonus.
     - [ ] Attaque invalide (pas d'ennemi/trop loin) : testez l'attaque d'une case vide ou d'une case trop éloignée, en attendant une ImpossibleActionException.

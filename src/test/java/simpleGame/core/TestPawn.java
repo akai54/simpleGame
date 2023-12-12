@@ -16,7 +16,7 @@ public class TestPawn {
 
         assertEquals(pawn.getLetter(), 'c');
         assertEquals(pawn.getGold(), 0);
-        assertEquals(pawn.getHitpoints(), 2);
+        assertEquals(pawn.getHitpoints(), 6);
         assertTrue(pawn.getPosition().equals(new Position(1,1)));
     }
 
@@ -43,13 +43,13 @@ public class TestPawn {
     void testMoveException() throws ImpossibleActionException{
         Board board = new Board(3,5,5, 2, 2);
         Pawn pawn0 = new Pawn( 'c', 0, 0, board);
-        Pawn pawn1 = new Pawn( 'c', 4, 4, board);
+        Pawn pawn1 = new Pawn( 'c', 5, 4, board);
 
         //when out of the grid
         assertThrows(ImpossibleActionException.class, () -> pawn0.move(new Position(-1,0)));
         assertThrows(ImpossibleActionException.class, () -> pawn0.move(new Position(0,-1)));
-        assertThrows(ImpossibleActionException.class, () -> pawn1.move(new Position(5,4)));
-        assertThrows(ImpossibleActionException.class, () -> pawn1.move(new Position(4,5)));
+        assertThrows(ImpossibleActionException.class, () -> pawn1.move(new Position(5,5)));
+        assertThrows(ImpossibleActionException.class, () -> pawn1.move(new Position(6,5)));
 
         //when the new position is not adjacent
         assertThrows(ImpossibleActionException.class, () -> pawn0.move(new Position(1,1)));
@@ -66,13 +66,30 @@ public class TestPawn {
         Pawn pawn = new Pawn( 'c', 0, 0, board);
 
         pawn.suffer(1);
+        assertEquals(pawn.getHitpoints(), 5);
 
-        assertEquals(pawn.getHitpoints(), 1);
+        // Test if severall calls work fine
+        pawn.suffer(3);
+        assertEquals(pawn.getHitpoints(), 2);
     }
 
     @Test
-    @DisplayName("Test if the pawn take hitpoints and is removed from the game")
+    @DisplayName("Test if the pawn take hitpoints and is declared dead")
     void testSufferAndRemove(){
+        Board board = new Board(3,5,5, 2, 2);
+        Pawn pawn = new Pawn( 'c', 0, 0, board);
+
+        assertFalse(pawn.isDead());
+        pawn.suffer(3);
+        assertFalse(pawn.isDead());
+        pawn.suffer(3);
+        assertTrue(pawn.isDead());
+
+        //Test if hitpoints get below 0
+        Pawn pawnB = new Pawn( 'B', 1, 0, board);
+
+        pawn.suffer(7);
+        assertTrue(pawnB.isDead());
     }
 
 
