@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import simpleGame.core.Board.SquareStatus;
 
-class boardtest {
+class TestBoard {
 
     private Board board;
 

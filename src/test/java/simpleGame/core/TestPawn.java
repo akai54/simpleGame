@@ -6,7 +6,7 @@ import simpleGame.exception.ImpossibleActionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class pawntest {
+public class TestPawn {
 
     @Test
     @DisplayName("Constructor correctly initialized")

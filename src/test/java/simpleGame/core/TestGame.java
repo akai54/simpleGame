@@ -7,7 +7,7 @@ import simpleGame.exception.ImpossibleActionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class gametest {
+class TestGame {
 
     private Game game;
     private Board board;
