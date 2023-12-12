@@ -29,6 +29,9 @@ class TestBoard {
 
     @Test
     void testAddPawn() {
+        //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
+        board.removeAllPawns();
+
         /* On s'assure que la position où il y aura pawn est vide et renvoi Null pour l'instant */
         assertNull(board.getSquareContent(new Position(3,3)));
         /* On ajoute pawn à la meme position d'en haut */
@@ -41,6 +44,9 @@ class TestBoard {
 
     @Test
     void testGetSquareContent() {
+        //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
+        board.removeAllPawns();
+
         Pawn pawn = new Pawn('E', 3, 4, board);
 
         /* On suppose que addPawn() ajoute un pion au plateau correctement */
@@ -56,6 +62,9 @@ class TestBoard {
 
     @Test
     void removePawn() {
+        //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
+        board.removeAllPawns();
+
         /* On s'assure que la position où il y aura pawn est vide et renvoi Null pour l'instant */
         assertNull(board.getSquareContent(new Position(1,1)));
 
@@ -114,6 +123,9 @@ class TestBoard {
 
     @Test
     public void testSquareContentSprite() {
+        //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
+        board.removeAllPawns();
+
         Board boardContentSprite = new Board(1, 5, 5, 2, 2);
         Pawn pawn = new Pawn('A', 1, 1, boardContentSprite);
         boardContentSprite.addPawn(pawn);
@@ -144,6 +156,9 @@ class TestBoard {
 
     @Test
     public void testGetStatusOfSquare() {
+        //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
+        board.removeAllPawns();
+
         Board boardGetStatusOfSquare = new Board(1, 5, 5, 0, 0);
         Pawn pawn = new Pawn('A', 2, 3, boardGetStatusOfSquare);
         boardGetStatusOfSquare.addPawn(pawn);
@@ -164,6 +179,9 @@ class TestBoard {
 
     @Test
     public void testGetCurrentPawn() {
+        //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
+        board.removeAllPawns();
+        
         Board boardGetCurrentPawn = new Board(3, 5, 5, 0, 0);
 
         Pawn Pawn1 = new Pawn('A', 3, 0, boardGetCurrentPawn);
