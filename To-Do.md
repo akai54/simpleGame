@@ -32,10 +32,10 @@
     - [X] Déplacement invalide (hors plateau/occupé/trop loin) : testez le déplacement vers une case qui est hors du plateau, déjà occupée ou non adjacente, en attendant une ImpossibleActionException.
 - [X] **Test de suffer** : Testez la méthode suffer pour vous assurer qu'elle réduit correctement les points de vie et gère la mort des pions.
 - [X] **Test IsDead** : Vérifiez qu'isDead identifie correctement le moment où les points de vie d'un pion atteignent zéro.
-- [ ] **Tests d'attaque** :
-    - [ ] Attaque valide (case normale et case bonus) : Testez l'attaque d'un autre pion dans des conditions normales et depuis une case bonus.
-    - [ ] Attaque invalide (pas d'ennemi/trop loin) : testez l'attaque d'une case vide ou d'une case trop éloignée, en attendant une ImpossibleActionException.
-    - [ ] Incrément d'or en cas de mise à mort : Vérifiez que l'or du pion augmente lorsqu'il tue un autre pion.
+- [X] **Tests d'attaque** :
+    - [X] Attaque valide (case normale et case bonus) : Testez l'attaque d'un autre pion dans des conditions normales et depuis une case bonus.
+    - [X] Attaque invalide (pas d'ennemi/trop loin) : testez l'attaque d'une case vide ou d'une case trop éloignée, en attendant une ImpossibleActionException.
+    - [X] Incrément d'or en cas de mise à mort : Vérifiez que l'or du pion augmente lorsqu'il tue un autre pion.
 - [ ] **Tests pour la méthode getLetter() et getGold()** : Assurez-vous que ces méthodes retournent les valeurs correctes.
 
 ### Position
