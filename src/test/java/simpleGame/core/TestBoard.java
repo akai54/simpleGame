@@ -101,6 +101,8 @@ class TestBoard {
     @Test
     void testRemoveAllPawns() {
         Board boardRemoveAllPawns = new Board(2,5,5,3,4);
+        boardRemoveAllPawns.removeAllPawns();
+
         Pawn pawn1 = new Pawn('E', 4, 4, boardRemoveAllPawns);
         Pawn pawn2 = new Pawn('Z', 4, 1, boardRemoveAllPawns);
 
@@ -129,10 +131,9 @@ class TestBoard {
 
     @Test
     public void testSquareContentSprite() {
-        //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
-        board.removeAllPawns();
-
         Board boardContentSprite = new Board(1, 5, 5, 2, 2);
+        boardContentSprite.removeAllPawns();
+
         Pawn pawn = new Pawn('A', 1, 1, boardContentSprite);
         boardContentSprite.addPawn(pawn);
 
@@ -163,9 +164,10 @@ class TestBoard {
     @Test
     public void testGetStatusOfSquare() {
         //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
-        board.removeAllPawns();
 
         Board boardGetStatusOfSquare = new Board(1, 5, 5, 0, 0);
+        boardGetStatusOfSquare.removeAllPawns();
+
         Pawn pawn = new Pawn('A', 2, 3, boardGetStatusOfSquare);
         boardGetStatusOfSquare.addPawn(pawn);
 
@@ -185,10 +187,8 @@ class TestBoard {
 
     @Test
     public void testGetCurrentPawn() {
-        //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
-        board.removeAllPawns();
-
         Board boardGetCurrentPawn = new Board(3, 5, 5, 0, 0);
+        boardGetCurrentPawn.removeAllPawns();
 
         Pawn Pawn1 = new Pawn('A', 3, 0, boardGetCurrentPawn);
         Pawn Pawn2 = new Pawn('B', 3, 1, boardGetCurrentPawn);
@@ -196,6 +196,9 @@ class TestBoard {
 
         boardGetCurrentPawn.addPawn(Pawn1);
         boardGetCurrentPawn.addPawn(Pawn2);
+        boardGetCurrentPawn.addPawn(Pawn3);
+
+        boardGetCurrentPawn.newTurn(); // On considère que c'est le premier tour, normalement non appellé
 
         assertEquals(Pawn1.getLetter(), boardGetCurrentPawn.getCurrentPawn().getLetter());
 

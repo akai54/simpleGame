@@ -62,6 +62,7 @@ class TestGame {
     @Test
     @DisplayName("Test de playRound avec un déplacement invalide")
     void testPlayRoundInvalidMove() throws ImpossibleActionException {
+        board.removeAllPawns();
         Pawn pawn1 = new Pawn( 'A', 0, 1, board);
         Pawn pawn2 = new Pawn( 'B', 2, 3, board);
 
