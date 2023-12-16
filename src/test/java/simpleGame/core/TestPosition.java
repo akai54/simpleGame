@@ -77,14 +77,22 @@ public class TestPosition {
     @Test
     @DisplayName("coords equals to other")
     public void testEquals() {
+        Board board = new Board(2, 5, 5, 2, 2);
+
         Position position1 = new Position(3,4);
         Position position2 = new Position(3,4);
         Position position3 = new Position(4,5);
+
+        Pawn pawn1 = new Pawn( 'd', 2, 1, board);
 
         /* Test deux objets avec les memes coordonnées */
         assertTrue(position1.equals(position2));
 
         /* Test deux objets qui ont pas les memes coordonnées */
         assertFalse(position1.equals(position3));
+
+        /* Test une instance position avec Pawn */
+        assertFalse(position1.equals(pawn1));
+
     }
 }
