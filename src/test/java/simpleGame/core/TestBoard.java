@@ -127,6 +127,7 @@ public class TestBoard {
     }
 
     @Test
+    @DisplayName("S'assure que le pion courrant roule à chaque changement de tour")
     public void testNewTurn() {
         board.removeAllPawns();
 

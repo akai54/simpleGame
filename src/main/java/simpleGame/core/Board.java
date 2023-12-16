@@ -225,9 +225,11 @@ public class Board {
             for (int x = 0; x < xSize; x++) {
                 Position squarePosition = new Position(x, y);
                 result += squareContentSprite(squarePosition);
-                if (x == xSize) {
-                    result += '|';
-                }
+                // On a comme invariant x<xSize. Donc on ne peux pas rentrer dans ce if
+                // De plus le charactère '|' ne correspond à rien dans la spec, on peux donc le supprimer
+                // if (x == xSize) {
+                //     result += '|';
+                // }
             }
             result += "\n";
         }

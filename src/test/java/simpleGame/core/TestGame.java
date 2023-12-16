@@ -75,4 +75,9 @@ public class TestGame {
             game.playRound(Direction.Left);
         });
     }
+
+    @Test
+    public void testToString(){
+        assertEquals(board.toString(), game.toString());
+    }
 }
