@@ -1,15 +1,19 @@
 package simpleGame.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import simpleGame.core.Board.SquareStatus;
-import simpleGame.util.StringColoring.GameColor;
-
-
 import simpleGame.util.StringColoring;
+import simpleGame.util.StringColoring.GameColor;
 
 public class TestBoard {
 
@@ -124,13 +128,31 @@ public class TestBoard {
 
     @Test
     public void testNewTurn() {
-        Board boardNewTurn = new Board(3, 5, 5, 0, 0);
-        Pawn pawn1 = boardNewTurn.getCurrentPawn();
+        board.removeAllPawns();
 
-        boardNewTurn.newTurn();
-        Pawn pawn2 = boardNewTurn.getCurrentPawn();
+        Pawn pawn1 = new Pawn('E', 4, 4, board);
+        Pawn pawn2 = new Pawn('Z', 4, 1, board);
+        Pawn pawn3 = new Pawn('D', 0, 0, board);
 
-        assertNotEquals(pawn1, pawn2);
+        board.addPawn(pawn1);
+        board.setCurrentPawn(pawn1);
+
+        //Si il n'y a qu'un seul pion, le nouveau pion reste le même
+        board.newTurn();
+        assertEquals(pawn1, board.getCurrentPawn());
+        
+        //mais avec plusieurs pion, il y a un roulement
+        board.addPawn(pawn2);
+        board.addPawn(pawn3);
+
+        board.newTurn();
+        assertEquals(pawn2, board.getCurrentPawn());
+
+        board.newTurn();
+        assertEquals(pawn3, board.getCurrentPawn());
+
+        board.newTurn();
+        assertEquals(pawn1, board.getCurrentPawn());
     }
 
     @Test
@@ -236,21 +258,22 @@ public class TestBoard {
         assertEquals(Pawn1.getLetter(), boardGetCurrentPawn.getCurrentPawn().getLetter());
     }
 
-    // @Test
-    // @DisplayName("S'assure que la sortie texte soit correcte")
-    // public void testToString(){
-    //     board.removeAllPawns();
+    @Test
+    @DisplayName("S'assure que la sortie texte soit correcte")
+    public void testToString(){
+        board.removeAllPawns();
 
-    //     Pawn Pawn1 = new Pawn('A', 2, 0, board);
-    //     Pawn Pawn2 = new Pawn('B', 3, 1, board);
-    //     Pawn Pawn3 = new Pawn('C', 0, 2, board);
+        Pawn Pawn1 = new Pawn('A', 2, 0, board);
+        Pawn Pawn2 = new Pawn('B', 3, 1, board);
+        Pawn Pawn3 = new Pawn('C', 0, 2, board);
 
-    //     board.addPawn(Pawn1);
-    //     board.addPawn(Pawn2);
-    //     board.addPawn(Pawn3);
+        board.addPawn(Pawn1);
+        board.addPawn(Pawn2);
+        board.addPawn(Pawn3);
 
-    //     String texteAttendu =  "..#.\nC...\n...B\n.A..";
+        String diese = StringColoring.colorString("#", GameColor.YELLOW);
+        String texteAttendu =  ".." + diese + ".\nC...\n...B\n..A.\n";
 
-    //     assertEquals(texteAttendu, board.toString());
-    // }
+        assertEquals(texteAttendu, board.toString());
+    }
 }
