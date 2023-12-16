@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TestDirection {
+public class TestDirection {
 
     @Test
     @DisplayName("Tester les 4 valeurs")

@@ -7,20 +7,20 @@ import simpleGame.exception.ImpossibleActionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TestGame {
+public class TestGame {
 
     private Game game;
     private Board board;
 
     @BeforeEach
-    void init() {
+    public void init() {
         game = new Game();
         board = game.getBoard();
     }
 
     @Test
     @DisplayName("Constructeur")
-    void testGameConstructeur() {
+    public void testGameConstructeur() {
         assertEquals(2, board.numberOfPawns());
         assertEquals(4, board.getXSize());
         assertEquals(4, board.getYSize());
@@ -28,7 +28,7 @@ class TestGame {
 
     @Test
     @DisplayName("isGameOver avec un pion restant")
-    void testIsGameOver1Pawn() {
+    public void testIsGameOver1Pawn() {
         assertFalse(game.isGameOver());
 
         board.removePawn(board.getCurrentPawn());
@@ -38,7 +38,7 @@ class TestGame {
 
     @Test
     @DisplayName("isGameOver avec 3 pièces d'or")
-    void testIsGameOver3Gold() {
+    public void testIsGameOver3Gold() {
         assertFalse(game.isGameOver());
 
         board.getCurrentPawn().setGold(3);
@@ -48,7 +48,7 @@ class TestGame {
 
     @Test
     @DisplayName("Test de playRound avec un déplacement valide")
-    void testPlayRoundValidMove() {
+    public void testPlayRoundValidMove() {
         Pawn pawn1 = new Pawn( 'A', 1, 1, board);
         Pawn pawn2 = new Pawn( 'B', 2, 1, board);
 
@@ -61,7 +61,7 @@ class TestGame {
 
     @Test
     @DisplayName("Test de playRound avec un déplacement invalide")
-    void testPlayRoundInvalidMove() throws ImpossibleActionException {
+    public void testPlayRoundInvalidMove() throws ImpossibleActionException {
         board.removeAllPawns();
         Pawn pawn1 = new Pawn( 'A', 0, 1, board);
         Pawn pawn2 = new Pawn( 'B', 2, 3, board);

@@ -7,18 +7,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import simpleGame.core.Board.SquareStatus;
 
-class TestBoard {
+public class TestBoard {
 
     private Board board;
 
     @BeforeEach
-    void init() {
+    public void init() {
         board = new Board(2, 4, 4, 3, 4);
     }
 
     @Test
     @DisplayName("Test du Constructeur du Board")
-    void testBoardConstruct() {
+    public void testBoardConstruct() {
         /* Test position case bonus */
         assertEquals(board.getBonusSquare(), new Position(3,4));
 
@@ -28,7 +28,7 @@ class TestBoard {
     }
 
     @Test
-    void testAddPawn() {
+    public void testAddPawn() {
         //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
         board.removeAllPawns();
 
@@ -49,7 +49,7 @@ class TestBoard {
     }
 
     @Test
-    void testGetSquareContent() {
+    public void testGetSquareContent() {
         //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
         board.removeAllPawns();
 
@@ -67,7 +67,7 @@ class TestBoard {
     }
 
     @Test
-    void removePawn() {
+    public void removePawn() {
         //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
         board.removeAllPawns();
 
@@ -88,18 +88,18 @@ class TestBoard {
     }
 
     @Test
-    void testIsBonusSquare() {
+    public void testIsBonusSquare() {
         assertTrue(board.isBonusSquare(new Position(3,4)));
         assertFalse(board.isBonusSquare(new Position(1,1)));
     }
 
     @Test
-    void testNumberOfPawns() {
+    public void testNumberOfPawns() {
         assertEquals(2, board.numberOfPawns());
     }
 
     @Test
-    void testRemoveAllPawns() {
+    public void testRemoveAllPawns() {
         Board boardRemoveAllPawns = new Board(2,5,5,3,4);
         boardRemoveAllPawns.removeAllPawns();
 
@@ -119,7 +119,7 @@ class TestBoard {
     }
 
     @Test
-    void testNewTurn() {
+    public void testNewTurn() {
         Board boardNewTurn = new Board(3, 5, 5, 0, 0);
         Pawn pawn1 = boardNewTurn.getCurrentPawn();
 
@@ -149,17 +149,6 @@ class TestBoard {
         String caseBonus = boardContentSprite.squareContentSprite(new Position(2, 2));
         assertEquals("\u001B[33m#\u001B[m", caseBonus);
     }
-
-    /*@Test
-    public void testToString() {
-        Board board = new Board(1, 3, 3, 1, 1);
-        Pawn pawn = new Pawn('A', 0, 0, board);
-        board.addPawn(pawn);
-
-        // Générez la chaîne attendue en fonction de la disposition spécifique du plateau
-        String expected = "⋅⋅⋅\n⋅\u001B[33m#\u001B[m⋅\nA⋅⋅\n";
-        assertEquals(expected, board.toString());
-    } */
 
     @Test
     public void testGetStatusOfSquare() {

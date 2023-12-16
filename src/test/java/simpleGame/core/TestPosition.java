@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TestPosition {
+public class TestPosition {
 
     @Test
     @DisplayName("Constructor correctly initialized")
-    void testPositionConstructor() {
+    public void testPositionConstructor() {
         Position position = new Position(3,4);
         assertEquals(3, position.getX());
         assertEquals(4, position.getY());
@@ -17,7 +17,7 @@ class TestPosition {
 
     @Test
     @DisplayName("create object with same coordinates")
-    void testCopy() {
+    public void testCopy() {
         Position originalPosition = new Position(3,4);
         Position copied = originalPosition.copy();
 
@@ -27,7 +27,7 @@ class TestPosition {
 
     @Test
     @DisplayName("create object next to coordinates")
-    void testGetPositionNextTo() {
+    public void testGetPositionNextTo() {
         Position position = new Position(3,4);
 
         Position nextToPositionRight = position.getPositionNextTo(Direction.Right);
@@ -49,7 +49,7 @@ class TestPosition {
 
     @Test
     @DisplayName("Is coords next to other coords")
-    void testIsNextTo() {
+    public void testIsNextTo() {
         Position position = new Position(3,4);
 
         /* Test position adjacent */
@@ -76,7 +76,7 @@ class TestPosition {
 
     @Test
     @DisplayName("coords equals to other")
-    void testEquals() {
+    public void testEquals() {
         Position position1 = new Position(3,4);
         Position position2 = new Position(3,4);
         Position position3 = new Position(4,5);

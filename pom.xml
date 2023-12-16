@@ -8,7 +8,6 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
 		<exec.mainClass>simpleGame.cli.CLIMain</exec.mainClass>
-
 	</properties>
 
 	<dependencies>
@@ -27,30 +26,28 @@
 
 	<build>
 		<plugins>
-
-		  <plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-assembly-plugin</artifactId>
-			<executions>
-			  <execution>
-				<phase>package</phase>
-				<goals>
-				  <goal>single</goal>
-				</goals>
-				<configuration>
-				  <archive>
-					<manifest>
-					  <mainClass>${exec.mainClass}</mainClass>
-					</manifest>
-				  </archive>
-				  <descriptorRefs>
-					<descriptorRef>jar-with-dependencies</descriptorRef>
-				  </descriptorRefs>
-				</configuration>
-			  </execution>
-			</executions>
-		  </plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>${exec.mainClass}</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -76,7 +73,6 @@
 
 				</executions>
 			</plugin>
-
 			<!-- Normalement maven-site-plugin est chargé par défaut par maven -->
 			<!-- Mais c'est ici nécessaire car jacoco nécessite une version récente -->
 			<plugin>
@@ -84,8 +80,12 @@
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.12.1</version>
 			</plugin>
-		  
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.2</version>
+			</plugin>
 		</plugins>
-	  </build>
-	
+	</build>
 </project>

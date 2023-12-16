@@ -8,12 +8,12 @@ import simpleGame.exception.ImpossibleActionException;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class TestPawn {
+public class TestPawn {
 
     private Board board;
 
     @BeforeEach
-    void init() {
+    public void init() {
         board = new Board(2, 5, 5, 2, 2);
 
         //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
@@ -22,7 +22,7 @@ class TestPawn {
 
     @Test
     @DisplayName("Constructor correctly initialized")
-    void testPawnConstructor() {
+    public void testPawnConstructor() {
         Pawn pawn = new Pawn( 'c', 1, 1, board);
         board.addPawn(pawn);
 
@@ -34,7 +34,7 @@ class TestPawn {
 
     @Test
     @DisplayName("Test if the move function works as intended")
-    void testMove() throws ImpossibleActionException{
+    public void testMove() throws ImpossibleActionException{
         Pawn pawn0 = new Pawn( 'c', 0, 1, board);
         board.addPawn(pawn0);
         Position pos0 = new Position(0,0);
@@ -54,7 +54,7 @@ class TestPawn {
 
     @Test
     @DisplayName("Test if the move function returns ImpossibleActionException")
-    void testMoveException() throws ImpossibleActionException{
+    public void testMoveException() throws ImpossibleActionException{
         Pawn pawn0 = new Pawn( 'c', 0, 0, board);
         Pawn pawn1 = new Pawn( 'c', 4, 4, board);
         board.addPawn(pawn0);
@@ -77,7 +77,7 @@ class TestPawn {
 
     @Test
     @DisplayName("Test if the pawn take hitpoints")
-    void testSuffer(){
+    public void testSuffer(){
         Pawn pawn = new Pawn( 'c', 0, 0, board);
 
         pawn.suffer(1);
@@ -90,7 +90,7 @@ class TestPawn {
 
     @Test
     @DisplayName("Test if a pawn taking enough hitpoints is declared dead & is removed from the board")
-    void testSufferAndRemove(){
+    public void testSufferAndRemove(){
         Pawn pawn = new Pawn( 'c', 0, 0, board);
 
         assertFalse(pawn.isDead());
@@ -111,7 +111,7 @@ class TestPawn {
 
     @Test
     @DisplayName("Test attack Exception cases")
-    void testAttackExceptions() throws ImpossibleActionException{
+    public void testAttackExceptions() throws ImpossibleActionException{
         Pawn pawn0 = new Pawn( 'c', 2, 2, board); // is on a bonus square
         Pawn pawn1 = new Pawn( 'd', 4, 2, board);
         board.addPawn(pawn0);
@@ -129,7 +129,7 @@ class TestPawn {
 
     @Test
     @DisplayName("Test attack damages")
-    void testAttackDamage() throws ImpossibleActionException{
+    public void testAttackDamage() throws ImpossibleActionException{
         Pawn pawn0 = new Pawn( 'c', 2, 2, board); // is on a bonus square
         Pawn pawn1 = new Pawn( 'd', 2, 1, board);
         board.addPawn(pawn0);
@@ -146,7 +146,7 @@ class TestPawn {
 
     @Test
     @DisplayName("Test if killing an ennemy gives gold")
-    void testAttackGold() throws ImpossibleActionException{
+    public void testAttackGold() throws ImpossibleActionException{
         Pawn pawn0 = new Pawn( 'c', 2, 2, board); // is on a bonus square
         Pawn pawn1 = new Pawn( 'd', 2, 1, board);
         board.addPawn(pawn0);
@@ -163,11 +163,4 @@ class TestPawn {
         pawn0.attack(new Position(2, 1));
         assertEquals(1, pawn0.getGold()); 
     }
-
-    /*
-     * Move the pawn to a new position.
-     *
-     * @param p The position where the pawn should move.
-     * @throws ImpossibleActionException If the target position is out of bound, or occupied, or too far.
-     */
 }
