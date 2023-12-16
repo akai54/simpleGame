@@ -287,6 +287,12 @@ public class Board {
     public Position getBonusSquare() {
         return bonusSquare;
     }
+
+    public void setCurrentPawn(Pawn p){
+        if(pawns.contains(p)){
+            currentPawn = p;
+        }
+    }
 }
 
 

@@ -149,9 +149,40 @@ public class TestBoard {
         String caseVide = boardContentSprite.squareContentSprite(new Position(0, 0));
         assertEquals(".", caseVide);
 
-        /* Test pour une case bonus */
+        /* Test pour une case bonus vide*/
         String caseBonus = boardContentSprite.squareContentSprite(new Position(1, 2));
         assertEquals(StringColoring.colorString("#", GameColor.YELLOW), caseBonus);
+    }
+
+    @Test
+    @DisplayName("Test pawn's coloration on the board")
+    public void testSquareContentSpritePawn(){
+        Board boardContentSprite = new Board(1, 5, 5, 2, 3);
+        boardContentSprite.removeAllPawns();
+
+        Pawn pawn1 = new Pawn('A', 1, 2, boardContentSprite);
+        Pawn pawn2 = new Pawn('D', 0, 0, boardContentSprite);
+        
+        boardContentSprite.addPawn(pawn1);
+        boardContentSprite.addPawn(pawn2);
+
+        // Un pion inactif sur une case Bonus dois être YELLOW
+        String string1 = boardContentSprite.squareContentSprite(new Position(1, 2));
+        assertEquals(StringColoring.colorString("A", GameColor.YELLOW), string1);
+
+
+        // Un pion ACTIF sur une case Bonus dois être VERT
+        boardContentSprite.setCurrentPawn(pawn1);
+
+        String string2 = boardContentSprite.squareContentSprite(new Position(1, 2));
+        assertEquals(StringColoring.colorString("A", GameColor.GREEN), string2);
+
+
+        // Un pion ACTIF sur une case non-Bonus dois être BLUE
+        boardContentSprite.setCurrentPawn(pawn2);
+
+        String string3 = boardContentSprite.squareContentSprite(new Position(0, 0));
+        assertEquals(StringColoring.colorString("D", GameColor.BLUE), string3);
     }
 
     @Test
