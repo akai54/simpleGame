@@ -12,6 +12,10 @@ Mais parfois il pouvais écraser un pion, ce qui fait qu'il y avait un pion de m
 
 Nous avons donc changé la boucle for en boucle while
 
++
+
+Le bonus était initialisé avec des valeurs de 1 à n et pas de 0 à n-1
+
 #### testGetStatusOfSquare
 
 Dans la condition suivante, les cases testées à n+1 sont toujours considérées comme étant dans le tableau.
