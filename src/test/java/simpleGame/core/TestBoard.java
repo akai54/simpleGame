@@ -200,4 +200,22 @@ public class TestBoard {
         boardGetCurrentPawn.newTurn();
         assertEquals(Pawn1.getLetter(), boardGetCurrentPawn.getCurrentPawn().getLetter());
     }
+
+    @Test
+    @DisplayName("S'assure que la sortie texte soit correcte")
+    public void testToString(){
+        board.removeAllPawns();
+
+        Pawn Pawn1 = new Pawn('A', 2, 0, board);
+        Pawn Pawn2 = new Pawn('B', 3, 1, board);
+        Pawn Pawn3 = new Pawn('C', 0, 2, board);
+
+        board.addPawn(Pawn1);
+        board.addPawn(Pawn2);
+        board.addPawn(Pawn3);
+
+        String texteAttendu =  "..#.\nC...\n...B\n.A..";
+
+        assertEquals(texteAttendu, board.toString());
+    }
 }

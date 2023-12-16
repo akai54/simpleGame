@@ -108,7 +108,7 @@ public class Pawn {
             case OCCUPIED:
                 throw new ImpossibleActionException("Square already occupied, cannot move there.");
             }
-        } else {
+        }else{
             throw new ImpossibleActionException("Square is too far, cannot move there.");
         }
     }
