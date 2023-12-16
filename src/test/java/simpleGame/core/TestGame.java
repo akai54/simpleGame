@@ -48,14 +48,15 @@ public class TestGame {
 
     @Test
     @DisplayName("Test de playRound avec un déplacement valide")
-    public void testPlayRoundValidMove() {
+    public void testPlayRoundValidMove() throws ImpossibleActionException{
+        board.removeAllPawns();
         Pawn pawn1 = new Pawn( 'A', 1, 1, board);
         Pawn pawn2 = new Pawn( 'B', 2, 1, board);
 
-        board.removePawn(board.getCurrentPawn());
         board.addPawn(pawn1);
-        board.removePawn(board.getCurrentPawn());
         board.addPawn(pawn2);
+
+        board.newTurn();
         assertDoesNotThrow(() -> game.playRound(Direction.Right));
     }
 
@@ -66,12 +67,10 @@ public class TestGame {
         Pawn pawn1 = new Pawn( 'A', 0, 1, board);
         Pawn pawn2 = new Pawn( 'B', 2, 3, board);
 
-        board.removePawn(board.getCurrentPawn());
         board.addPawn(pawn1);
-        board.removePawn(board.getCurrentPawn());
         board.addPawn(pawn2);
+
         board.newTurn();
-        
         assertThrows(ImpossibleActionException.class, () -> {
             game.playRound(Direction.Left);
         });
