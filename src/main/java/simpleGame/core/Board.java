@@ -77,7 +77,7 @@ public class Board {
     public Board(int numberOfPawns, int sizeX, int sizeY, int xBonus, int yBonus) {
         this.xSize = sizeX;
         this.ySize = sizeY;
-        this.bonusSquare = new Position(xBonus, yBonus);
+        this.bonusSquare = new Position(xBonus-1, yBonus-1);
         this.pawns = new ArrayList<Pawn>();
 
         int i=1;

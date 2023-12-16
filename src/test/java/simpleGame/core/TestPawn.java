@@ -14,7 +14,7 @@ public class TestPawn {
 
     @BeforeEach
     public void init() {
-        board = new Board(2, 5, 5, 2, 2);
+        board = new Board(2, 5, 5, 3, 3);
 
         //supprime tout les pions qui se sont initialisés aléatoirement sur la grille
         board.removeAllPawns();
