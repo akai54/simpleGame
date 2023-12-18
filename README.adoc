@@ -1,77 +1,120 @@
-:sectnums:
+= SIMPLE GAME - TEST REVIEW
 
-= A very simple game
+_Besher AL ADDAM, Anis AIT YACOUB & Mattéo DERANSART_
 
-== Introduction
+== Analyse de la testabilité
 
-A very trivial video game with a textual interface, where several "pawns" have to fight by moving on the squares of a board. Written in Java.
-
-== Rules of the game
-
-* The setting is a rectangular board, divided in X × Y squares, with two random "bonus" squares, and with N pawns distributed randomly over the board.
-* Each pawn has a letter (A, B, C, etc.), and turns are based on the order of the letters (e.g. A plays first, then B plays, then C plays, etc.)
-* At each turn, a pawn acts in a direction (up, down, left, right):
-** If the square is empty, it moves there.
-** If it encounters a pawn, it attacks the pawn and hurts it.
-** If it tries to act out of the board, it loses its turn.
-* When attacking, a pawn normally inflicts 1 damage to another pawn. 
-However, it inflicts twice the amount if it is on a "bonus" square. 
-If a pawn kills another one, it earns 1 gold.
-* A pawn has 6 hitpoints
-* The game is over either when there is 1 pawn left, either when a pawn has 3 golds.
+=== Les différentes classes
 
 
-== Informations for developers
 
-=== Compiling and running the game for development
+- La classe main: +
+Cette classe est difficile à tester. En l'état, elle prend en entrée des saisies utilisateurs pour fonctionner. Il va donc être difficile de tester notre programme sans mocker les entrées
 
-Builds are managed using _maven_. 
-To compile simply run:
+- La classe Pawn: +
+La classe Pawn possède des attributs privés, mais ceux ci sont tous accessibles facilement depuis des getters, a l'exception près des *hitpoints*.
+Il faudra aussi s'assurer que la classe Board qu'elle utilise sera bien testée.
+En conséquent, il sera plutot facile de tester toutes les méthodes de cette classe en rajoutant le bon getter.
 
-....
-mvn compile
-....
+- La classe Position: +
+La classe position ne possède que deux attributs : *x* et *y*. Ceux ci sont accessibles par des getters. La classe est donc très facilement testable
 
-Then to run the game:
+- La classe Direction: +
+Cette classe est juste un enum. Il n'est pas nécessaire de la tester.
 
-....
-mvn exec:java
-....
-
-The game then starts, and shows you a board with both Pawns and the bonus squares. 
-A Pawn is either shown as a single letter (`A` or `B`), and is colored in blue (or green when the Pawn is on a bonus square) when it is its turn. 
-A bonus square is shown as a yellow `#`.
-
-You can type a number between 0 and 3 on your keyboard to select the direction you want the current pawn to pick, and then validate this choice with your return key.
-
-=== Packaging and distribution the game
-
-To produce a single executable jar file with all dependencies, simply run:
-
-....
-mvn package
-....
-
-This will produce a file `target/simpleGame-1-jar-with-dependencies.jar` which can be easily distributed, and used with a simple `java` command:
-
-....
-java -jar simpleGame-1-jar-with-dependencies.jar
-....
+- La classe Board: +
 
 
-=== Organisation of the code
+== Application d'une méthode fonctionnelle
 
-* `simplegame.cli`: Package with the user interface and the main method.
-** `CLIMain`: The main class, to play the game with a console interface.
-* `simplegame.core`: Package with the main classes.
-** `Board Class`: that describes the board.
-** `Direction`: Enumeration of the directions a Pawn can follow.
-** `Game`: Class to initialize and interact with the game.
-** `Pawn`: Class that describes the state and behavior of a Pawn.
-** `Position`: Class that describes a (x,y) position.
-* `simplegame.exception`: Package with the exceptions used.
-** `ImpossibleActionException`: Sent when a Pawn cannot perform an action.
-* `simplegame.uil`: Package with some utiliy classes.
-** `CharUtil`: Class with operations to manipulate chars.
-** `Logger`: Class to print messages.
-** `StringColoring`: Class to make colored String that can be printed in a console.
+== Application d'une méthode structurelle
+
+== Couverture de code avec Jacoco
+
+=== Première évaluation
+
+Voici la première couverture de code réalisée avec Jacoco:
+
+81% de couverture de code au niveau global!
+Nous n'avons testé que le module core à ce moment-là, mais il nous as semblé avoir fait la plus grosse partie du travail.
+
+image::data/jacoco_firstGlance_global.png[]
+
+Nous allons devoir revoir les tests de Board et de Game qui se révèlent être insuffisants. Nous sommes pourtant assez satisfait en ce qui concerne les autres classes 
+
+image::data/jacoco_firstGlance_core.png[]
+
+La couverture de tests n'est pas encore suffisante, nous allons devoir améliorer celà
+
+
+=== Deuxième évaluation
+
+Voici la version finale de l'évaluation de notre couverture de code:
+
+Nous avons écris quelques tests pour le module util entre temps, mais ne sommes pas allés jusqu'à 100% de couverture de test. Certaines méthodes comme la méhode main étaient tout simplement trop difficile à tester.
+
+image::data/jacoco_final_global.png[]
+
+Nous avons atteint 100% de couverture de code pour le module core! C'était notre objectif de départ et nous l'avons fait.
+
+image::data/jacoco_final_core.png[]
+
+Nous sommes satisfait de notre couverture de code.
+Si nous ne sommes pas à 100% de couverture de code sur l'ensemble du logiciel, nous considérons toutefois que c'est suffisant pour notre application.
+
+Naivement, nous faisont confiance à ce moment la au module utils (que nous déciderons de tester plus tard, comme expliqué dans le point suivant).
+
+Comme nous l'avons vu dans l'analyse de testabilité, le module cli quand à lui, est difficilement testable. Nous considérons qu'il est du travail du testeur "manuel" de vérifier son bon fonctionnement
+
+== Analyse de mutation avec PIT
+
+
+=== Première évaluation
+
+La première fois que nous avons utilisé PIT à été le moment ou nous avons réalisé que nous gagnerions à tester les autres modules:
+
+En effet, si le code du module core était plutot bien testé, rien ne nous prouve que le reste du programme fonctionne correctement.
+
+image::data/pit_firstGlance_global.png[]
+
+Puisque nous concentrons nos efforts sur le module core, il nous as semblé important de s'assurer que nos tests couvraient bien tout notre code.
+Dans notre cas, notre couverture de test laisse passer certains mutants, nous nous sommes alors décidés à améliorer nos tests
+
+image::data/pit_firstGlance_core.png[]
+
+Les analyses ci-dessus nous ont prouvé que nous avions encore un peu de chemin à faire avant de considérer nos tests comme suffisants.
+
+=== Evaluation Finale
+
+Nous avons bien amélioré notre résistance aux mutants. de 88%, nous sommes passés à 93% de résistance aux mutants.
+
+Tester une partie du module util nous as permis d'améliorer grandement ce score.
+
+image::data/pit_final_global.png[]
+
+Nous avons amélioré nos tests sur le module core pour qu'ils puissent s'adapter à un plus grand nombre de mutants.
+Toutefois, nos tests ne survivent pas à certaines mutations qui prennent toutes la forme suivante:
+
+[red]#1. removed call to simpleGame/util/Logger::log → SURVIVED#
+
+Ces mutations suppriment certains logs, et puisqu'on ne détecte pas si un log à été affiché, le mutant n'est pas rattrapé.
+Toutefois, nous considérons ces mutants comme bénins, et décidons de passer outre.
+
+image::data/pit_final_core.png[]
+
+== Conclusion
+
+En ayant passé en revue toutes les lignes de notre code non couvertes et/ou non-résilientes aux mutants, nous avons pu classer ces dernières dans deux catégories: +
+    - Les instructions systemes: Nous pourrions vérifier qu'une fonction appelle bien les appels qu'elle dis appeller, mais celà nous as semblé assez peu utile. +
+    - Les instructions néccessitant des entrées utilisateur: nous aurions pu mocker ces opérations, mais il nous as semblé peu interessant de le faire
+
+
+Nous considérons que le travail de test automatisé est fini à ce stade.
+Viens maintenant la phase ou nous devons tester manuellement le programme pour vérifier qu'il fonctionne bien.
+Certes ces tests ne sont pas parfais, la preuve en est que nous avons trouvé un dernier bug en lancant la partie manuellement:
+
+Les cases bonus ne s'affichaient que 3 fois sur 4. Il a été facile de localiser le problème, mais nos suites de tests ont du aussi être modifiées en conséquences.
+
+Toutefois ces tests n'ont pas été inutile et nous ont permis de trouver des erreurs dans le code que nous n'aurions jamais pensé trouver autrement.
+
+Les deux approches sont complémentaires
