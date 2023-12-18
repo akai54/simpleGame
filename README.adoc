@@ -2,30 +2,270 @@
 
 _Besher AL ADDAM, Anis AIT YACOUB & Mattéo DERANSART_
 
+== Liste des défauts
+
+* Le jeu est censé débuter avec des joueurs dans l’ordre alphabétique. Par exemple, si on a 3 joueurs A, B et C, le premier joueur sera A. Initialement, le premier joueur est B. 
+
+* Lorsqu’un pion essaye de sortir du plateau, il est censé perdre son tour. Initialement, il pouvait rejouer.
+
+* Lorsqu’un pion se déplace vers une case vide, il est censé ne pas perdre de point de vie. Initialement, il perdait 1 point de vie.
+
+* Le nombre de points de vie d’un pion est censé être de 6. Initialement, il a 2 points de vie. (résolu)
+
+* Lorsqu’un pion est sur une case bonus, il perd directement 2 points de vie. Or il n’est censé infliger des dégâts que lorsqu’il attaque un autre pion.
+
+* Lorsqu’un pion est sur une case bonus et qu’il attaque un autre pion, il est censé infligé 2 points de vie en plus. Dans le cas où l'adversaire a 1 point de vie, il est censé mourir. Or, il ne meurt pas, perd 2 points de vie et reste avec -1 point de vie.
+
+* La couleur CYAN de `StringColoring.java` renvoie la couleur orange, PURPLE ne fonctionne pas. (PURPLE n’existe pas dans la bibliothèque Jansi, remplacée par MAGENTA)
+
+
 == Analyse de la testabilité
 
 === Les différentes classes
 
+== Structure et Fonctionnalités de la Classe `Board`
+
+*Attributs et Leurs Accesseurs*::
++
+--
+- `xSize`, `ySize` : Dimensions du plateau, accessibles via `getXSize()` et `getYSize`.
+- `pawns` : Liste des pions sur le plateau.
+- `bonusSquare` : Position du carré bonus.
+- `currentPawn` : Pion actuellement en train de jouer.
++
+Ces attributs sont cruciaux pour déterminer l'état du jeu et sont directement liés à la logique du plateau.
+--
+
+*Constructeur*::
++
+Le constructeur initialise le plateau avec une taille spécifiée, un nombre de pions, et une position de bonus aléatoire. Cette initialisation implique une certaine aléatoire, affectant la prédictibilité et la reproductibilité dans les tests.
++
+
+*Méthodes de Gestion*::
++
+- `addPawn`
+- `removePawn`
+- `newTurn`
+- `removeAllPawns`
++
+Ces méthodes modifient l'état des pions sur le plateau, nécessitant des tests pour s'assurer que les modifications d'état sont correctes.
++
+
+*Méthodes d'Interrogation*::
++
+- `getSquareContent`
+- `isBonusSquare`
+- `numberOfPawns`
+- `maxGold`
+- `getStatusOfSquare`
++
+Ces méthodes fournissent des informations sur l'état actuel du plateau, et leur précision est vitale pour la logique du jeu.
++
+
+*Représentation Visuelle*::
++
+- `squareContentSprite`
+- `toString`
++
+Ces méthodes transforment l'état du plateau en représentations visuelles, nécessitant des tests pour vérifier leur exactitude.
++
 
 
-- La classe main: +
-Cette classe est difficile à tester. En l'état, elle prend en entrée des saisies utilisateurs pour fonctionner. Il va donc être difficile de tester notre programme sans mocker les entrées
+== Analyse de la Testabilité
 
-- La classe Pawn: +
-La classe Pawn possède des attributs privés, mais ceux ci sont tous accessibles facilement depuis des getters, a l'exception près des *hitpoints*.
-Il faudra aussi s'assurer que la classe Board qu'elle utilise sera bien testée.
-En conséquent, il sera plutot facile de tester toutes les méthodes de cette classe en rajoutant le bon getter.
+*Gestion de l'État et Dépendances*::
++
+La classe `Board` gère un état complexe et interagit avec `Pawn` et `Position`. Des tests unitaires doivent inclure des simulations (`mocking`) pour ces classes afin de vérifier l'intégrité de l'état du plateau.
++
 
-- La classe Position: +
-La classe position ne possède que deux attributs : *x* et *y*. Ceux ci sont accessibles par des getters. La classe est donc très facilement testable
+*Complexité des Méthodes et Scénarios de Test*::
++
+Les méthodes telles que `addPawn`, `removePawn`, `newTurn`, et `getStatusOfSquare` ont une logique interne qui nécessite des tests approfondis pour couvrir tous les cas possibles.
++
 
-- La classe Direction: +
-Cette classe est juste un enum. Il n'est pas nécessaire de la tester.
+*Aléatoire dans l'Initialisation*::
++
+L'initialisation aléatoire des pions et de la position du bonus implique que les tests doivent être conçus pour gérer différentes configurations initiales ou contrôler l'aléatoire.
++
 
-- La classe Board: +
+*Visualisation et Représentation*::
++
+Tester `squareContentSprite` et `toString` exige de vérifier que la représentation textuelle ou visuelle correspond exactement à l'état actuel du plateau.
++
+
+= Analyse de la Testabilité
+
+== Structure et Fonctionnalités de l'Énumération `Direction`
+
+*Simplicité*::
+`Direction` est une énumération standard de Java avec quatre valeurs : `Up`, `Down`, `Left`, `Right`. Elle ne possède pas de logique interne complexe ou d'état mutable, rendant sa testabilité intrinsèquement élevée.
+
+*Utilisation dans le Système*::
+Cette énumération est utilisée pour indiquer la direction du mouvement des pions (`Pawn`) dans d'autres parties du système. Sa simplicité assure une intégration facile et fiable dans des tests unitaires ou d'intégration pour d'autres classes.
+
+== Analyse de la Testabilité
+
+*Pas de Logique Interne*::
+`Direction`, en tant qu'énumération, ne contient pas de logique ou de méthodes internes à tester, ni d'état à vérifier, éliminant ainsi la nécessité de tests unitaires spécifiques pour cette énumération.
+
+*Fiabilité et Consistance*::
+Les énumérations en Java sont conçues pour être fiables et consistantes. Une fois définies, les valeurs de `Direction` restent inchangées et peuvent être utilisées de manière prévisible dans tout le système.
+
+*Utilisation dans D'autres Classes*::
+La testabilité de `Direction` réside principalement dans son utilisation dans d'autres classes. Il est crucial de s'assurer que les classes qui utilisent `Direction` gèrent correctement toutes ses valeurs.
+
+== Conclusion
+
+L'énumération `Direction` en elle-même ne nécessite pas de tests unitaires spécifiques en raison de sa nature statique et simple. L'accent doit être mis sur la manière dont `Direction` est utilisée dans d'autres parties du système, en garantissant que toutes les directions sont correctement gérées dans les scénarios de mouvement et d'interaction des pions.
 
 
-== Application d'une méthode fonctionnelle
+== Structure et Fonctionnalités de la Classe `Game`
+
+*Attributs*::
+`board` : Cet attribut représente le plateau de jeu, une composante centrale de la classe `Game`.
+
+*Constructeur*::
+Le constructeur initialise un `Board` avec des paramètres prédéfinis, y compris la position aléatoire du bonus. Cette initialisation aléatoire peut ajouter une complexité aux tests.
+
+*Méthodes*::
++
+--
+`isGameOver()` : Détermine si le jeu est terminé, basé sur le nombre de pions ou la quantité d'or accumulée.
+
+`toString()` : Représente l'état actuel du plateau de jeu.
+
+`playRound(Direction direction)` : Exécute un tour de jeu, impliquant soit un mouvement soit une attaque, en fonction de la direction et de l'état du plateau.
+--
+
+== Analyse de la Testabilité
+
+*Dépendances*::
+La classe `Game` dépend de `Board` et indirectement de `Pawn`. Tester `Game` implique de s'assurer que ces interactions fonctionnent comme prévu, ce qui peut nécessiter des simulations (`mocking`).
+
+*Complexité de la Méthode `playRound`*::
+Cette méthode a une logique complexe et dépend de l'état du plateau et des pions. Tester cette méthode implique de couvrir divers scénarios pour garantir une bonne couverture de test.
+
+*Gestion des Exceptions*::
+`playRound` lève des exceptions dans certaines conditions. Il est important de tester ces cas pour s'assurer que les exceptions sont lancées correctement.
+
+*Aléatoire dans le Constructeur*::
+L'utilisation de valeurs aléatoires dans le constructeur pour initialiser le plateau peut rendre les tests plus difficiles car le comportement initial du jeu peut varier.
+
+
+== Structure et Fonctionnalités de la Classe `Pawn`
+
+*Attributs et Leurs Accesseurs*::
+`position`, `board`, `hitpoints`, `gold`, `letter` : Ces attributs représentent l'état du pion sur le plateau de jeu. Les accesseurs `getPosition()`, `getLetter()` et `getGold()` permettent de vérifier certains de ces états, ce qui est positif pour la testabilité.
+
+*Constructeur*::
+Le constructeur initialise l'objet `Pawn` avec plusieurs paramètres (`n`, `x`, `y`, `board`), ce qui facilite la configuration de l'état initial du pion pour les tests.
+
+*Méthodes de Comportement*::
+`move(Position p)`, `suffer(int i)`, `isDead()`, `attack(Position p)` : Ces méthodes représentent les actions principales du pion. Elles interagissent avec d'autres objets (`Board`, `Position`) et peuvent lancer des exceptions, nécessitant une attention particulière lors des tests.
+
+== Analyse de la Testabilité
+
+*Dépendances*::
+La classe `Pawn` dépend fortement de la classe `Board` et indirectement de la classe `Position`. Cela peut compliquer les tests, nécessitant potentiellement de simuler (`mock`) ces objets pour isoler le comportement de `Pawn`.
+
+*Gestion des Exceptions*::
+Les méthodes `move` et `attack` lèvent des exceptions dans certaines conditions. Des tests spécifiques sont nécessaires pour s'assurer que les exceptions sont lancées correctement.
+
+*Complexité des Méthodes*::
+Des méthodes comme `move` et `attack` ont une logique conditionnelle complexe. Il est important de couvrir divers scénarios pour garantir une bonne couverture de test.
+
+*Effets Latéraux et État*::
+Des méthodes telles que `suffer` et `attack` modifient l'état du pion et peuvent affecter d'autres objets. Des tests doivent s'assurer que les effets latéraux sont corrects.
+
+*Testabilité et Isolation*::
+La testabilité pourrait être améliorée en rendant certaines dépendances plus facilement simulables, comme l'utilisation de l'injection de dépendances pour `Board`.
+
+== Conclusion
+
+La classe `Pawn` présente des défis pour la testabilité, notamment en raison de ses dépendances étroites, de la complexité de ses méthodes et de la gestion des exceptions.
+Les tests unitaires pour cette classe nécessiteront probablement des techniques de simulation (`mocking`) pour isoler son comportement. Des tests d'intégration peuvent également être nécessaires pour valider les interactions entre `Pawn` et `Board`.
+
+== Structure et Fonctionnalités de la Classe `Position`
+
+*Attributs Privés et Méthodes d'Accès*::
++
+La classe `Position` possède deux attributs privés `x` et `y` de type `int` et deux méthodes d'accès `getX()` et `getY()` qui permettent de récupérer les valeurs des attributs `x` et `y` respectivement. Cela est positif pour la testabilité car on peut vérifier l'état de l'objet après certaines opérations.
+
+*Constructeur*::
++
+La classe `Position` possède un constructeur qui prend deux paramètres `x` et `y` de type `int` et initialise les attributs `x` et `y` avec les valeurs fournies, facilitant la vérification de l'état de l'objet après l'instanciation.
+
+*Méthode `copy()`*::
++
+La classe `Position` possède une méthode `copy` qui retourne un objet de type `Position` qui est une copie de l'objet courant. Cela est positif pour la testabilité car on peut vérifier l'état de l'objet après l'opération de copie.
+
+*Méthode `getPositionNextTo(Direction d)`*::
++
+Cette méthode calcule une nouvelle position basée sur une direction donnée. Elle est simple à tester car elle ne dépend que des valeurs internes des objets `Position` et ne fait pas d'appel à des méthodes externes.
+
+*Méthode `isNextTo(Position otherPosition)`*::
++
+Cette méthode vérifie si une autre position est adjacente. Simple à tester car elle ne dépend que des valeurs internes des objets `Position` et ne fait pas d'appel à des méthodes externes.
+
+*Méthode `equals(Object other)`*::
++
+Cette méthode vérifie si une autre position est égale à l'objet courant. Elle est simple à tester car elle ne dépend que des valeurs internes des objets `Position` et ne fait pas d'appel à des méthodes externes.
+
+== Conclusion
+
+La classe `Position` offre une excellente testabilité grâce à ses méthodes bien conçues et à ses attributs privés bien gérés. Les modifications apportées renforcent la robustesse de la classe et facilitent les tests en couvrant plus efficacement les cas d'utilisation réels.
+
+== Package simpleGame.cli
+
+== Classe `CLIMain`
+
+=== Structure et Fonctionnalités
+* Gère l'interaction utilisateur dans une interface en ligne de commande.
+* Dépend de `Game` pour la logique du jeu et de `InputHandler` pour la saisie utilisateur.
+* Utilise une boucle pour traiter les entrées utilisateur et pour afficher l'état du jeu.
+
+=== Analyse de la Testabilité
+* *Dépendances Externes* : La classe dépend fortement de `Game` et `InputHandler`. Les mocks peuvent être nécessaires pour tester cette classe de manière isolée.
+* *Gestion des Entrées Utilisateur* : Tester la gestion des entrées utilisateur peut être complexe, surtout si elle implique des interactions dynamiques.
+* *Gestion des Exceptions* : Les exceptions levées par `Game` (comme `ImpossibleActionException`) doivent être prises en compte lors des tests.
+* *Sortie Console* : Tester la sortie console peut nécessiter une capture de la sortie standard pour vérifier les affichages et les messages d'erreur.
+
+== Package simpleGame.util
+
+== Classe `CharUtil`
+
+=== Structure et Fonctionnalités
+* Fournit une méthode statique pour convertir un nombre en caractère correspondant.
+* Simple et fonctionnelle, idéale pour les tests unitaires.
+
+=== Analyse de la Testabilité
+* *Simplicité* : La méthode est purement fonctionnelle, ce qui simplifie les tests.
+* *Cas Limites* : Important de tester avec des valeurs limites, comme des valeurs négatives ou supérieures à 26.
+
+== Classe `Logger`
+
+=== Structure et Fonctionnalités
+* Gère l'affichage des messages dans la console.
+* Utilise `AnsiConsole` pour gérer les couleurs et les formats de texte.
+
+=== Analyse de la Testabilité
+* *Sortie Console* : Comme pour `CLIMain`, tester cette classe peut impliquer la capture de la sortie console.
+* *Gestion des Couleurs* : Tester l'ajout correct des codes de couleur ANSI peut être un défi.
+
+== Classe `StringColoring`
+
+=== Structure et Fonctionnalités
+* Permet d'ajouter des couleurs aux chaînes de caractères en utilisant des codes ANSI.
+* Contient une énumération pour les couleurs supportées.
+
+=== Analyse de la Testabilité
+* *Génération des Chaînes Colorées* : Les tests doivent vérifier que la méthode génère correctement les chaînes avec les codes de couleur appropriés.
+* *Variété des Couleurs* : Tester chaque couleur de l'énumération pour s'assurer que toutes sont correctement appliquées.
+
+== Conclusion
+* La testabilité de `CLIMain` est complexe en raison de ses interactions avec l'utilisateur et ses dépendances externes. Les mocks et les captures de sortie console sont essentiels pour des tests efficaces.
+* Les classes utilitaires `CharUtil`, `Logger`, et `StringColoring` sont relativement plus simples à tester. `CharUtil` est idéal pour les tests unitaires, tandis que `Logger` et `StringColoring` nécessitent des tests spécifiques pour la gestion des sorties et des couleurs.
+
 
 == Application d'une méthode structurelle
 
