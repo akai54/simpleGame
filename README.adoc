@@ -347,26 +347,34 @@ image::data/pit_final_core.png[]
 
 |===
 |Classe |Défaut
-|Board:Board
+|Game::playRound
+|Il manque un break dans le switch
+|Board::Board
 |Parfois (mais pas tout le temps), une erreur était relevé sur la méthode testNumberOfPawns. La raison est que le constructeur faisait une boucle for aléatoirement sur le nombre de pions à initialiser.
 
 Dans ces cas la il pouvais écraser un ou plusieur pion, ce qui fait qu'il y avait moins de pion que souhaité sur le plateau.
 
 Nous avons donc changé la boucle for en boucle while
-|Board:Board
+|Board::Board
 |La case bonus était initialisé avec des valeurs de 1 à n et pas de 0 à n-1
+|Board::Board
+|Le contructeur incrémente le charactère du pion: A deviens B.
+|
 |Board::GetStatusOfSquare
 | Dans la condition suivante, les cases testées à n+1 sont toujours considérées comme étant dans le tableau. +
 "if (y <= this.getYSize() && x <= this.getXSize() && y >= 0 && x >= 0)"
 
 On change la condition pour que la logueur parcourue soit strictement inférieure à la taille du tableau
-|Position:isNextTo
+|Position::isNextTo
 |Dans la condition initale, on testais si une position était adjascent en x et adjascent en y. La zone pour laquelle la méthode renvoie true est donc assimilable à une croix qui parcours toute la board.
 
 Pour que la condition se rapproche de ce qui est demandé dans la spec, on a utilisé un XOR plutôt qu'un AND
-|Pawn:Pawn
+|Pawn::Pawn
 |Les hitpoints initiaux étaient configurés à 2 au lieu de 6 comme marqué dans la spec
-
+|Pawn::isDead
+|Un pion doit mourir si il à des points de vie strictement inférieur à 0. Non pas égal à 0 car les hitspoints peuvent être négatifs
+|GameColor
+|La valeur de l'enum PURPLE dois être MAGENTA
 |===
 
 
