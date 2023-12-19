@@ -1,11 +1,19 @@
 package simpleGame.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import simpleGame.core.Board.SquareStatus;
+import simpleGame.util.StringColoring;
+import simpleGame.util.StringColoring.GameColor;
 
 public class TestBoard {
 
@@ -20,7 +28,7 @@ public class TestBoard {
     @DisplayName("Test du Constructeur du Board")
     public void testBoardConstruct() {
         /* Test position case bonus */
-        assertEquals(board.getBonusSquare(), new Position(3,4));
+        assertEquals(board.getBonusSquare(), new Position(2,3));
 
         /* Test dimensions du plateau */
         assertEquals(board.getXSize(), 4);
@@ -89,8 +97,8 @@ public class TestBoard {
 
     @Test
     public void testIsBonusSquare() {
-        assertTrue(board.isBonusSquare(new Position(3,4)));
-        assertFalse(board.isBonusSquare(new Position(1,1)));
+        assertTrue(board.isBonusSquare(new Position(2,3)));
+        assertFalse(board.isBonusSquare(new Position(3,4)));
     }
 
     @Test
@@ -119,19 +127,38 @@ public class TestBoard {
     }
 
     @Test
+    @DisplayName("S'assure que le pion courrant roule à chaque changement de tour")
     public void testNewTurn() {
-        Board boardNewTurn = new Board(3, 5, 5, 0, 0);
-        Pawn pawn1 = boardNewTurn.getCurrentPawn();
+        board.removeAllPawns();
 
-        boardNewTurn.newTurn();
-        Pawn pawn2 = boardNewTurn.getCurrentPawn();
+        Pawn pawn1 = new Pawn('E', 4, 4, board);
+        Pawn pawn2 = new Pawn('Z', 4, 1, board);
+        Pawn pawn3 = new Pawn('D', 0, 0, board);
 
-        assertNotEquals(pawn1, pawn2);
+        board.addPawn(pawn1);
+        board.setCurrentPawn(pawn1);
+
+        //Si il n'y a qu'un seul pion, le nouveau pion reste le même
+        board.newTurn();
+        assertEquals(pawn1, board.getCurrentPawn());
+        
+        //mais avec plusieurs pion, il y a un roulement
+        board.addPawn(pawn2);
+        board.addPawn(pawn3);
+
+        board.newTurn();
+        assertEquals(pawn2, board.getCurrentPawn());
+
+        board.newTurn();
+        assertEquals(pawn3, board.getCurrentPawn());
+
+        board.newTurn();
+        assertEquals(pawn1, board.getCurrentPawn());
     }
 
     @Test
     public void testSquareContentSprite() {
-        Board boardContentSprite = new Board(1, 5, 5, 2, 2);
+        Board boardContentSprite = new Board(1, 5, 5, 2, 3);
         boardContentSprite.removeAllPawns();
 
         Pawn pawn = new Pawn('A', 1, 1, boardContentSprite);
@@ -145,9 +172,40 @@ public class TestBoard {
         String caseVide = boardContentSprite.squareContentSprite(new Position(0, 0));
         assertEquals(".", caseVide);
 
-        /* Test pour une case bonus */
-        String caseBonus = boardContentSprite.squareContentSprite(new Position(2, 2));
-        assertEquals("\u001B[33m#\u001B[m", caseBonus);
+        /* Test pour une case bonus vide*/
+        String caseBonus = boardContentSprite.squareContentSprite(new Position(1, 2));
+        assertEquals(StringColoring.colorString("#", GameColor.YELLOW), caseBonus);
+    }
+
+    @Test
+    @DisplayName("Test pawn's coloration on the board")
+    public void testSquareContentSpritePawn(){
+        Board boardContentSprite = new Board(1, 5, 5, 2, 3);
+        boardContentSprite.removeAllPawns();
+
+        Pawn pawn1 = new Pawn('A', 1, 2, boardContentSprite);
+        Pawn pawn2 = new Pawn('D', 0, 0, boardContentSprite);
+        
+        boardContentSprite.addPawn(pawn1);
+        boardContentSprite.addPawn(pawn2);
+
+        // Un pion inactif sur une case Bonus dois être YELLOW
+        String string1 = boardContentSprite.squareContentSprite(new Position(1, 2));
+        assertEquals(StringColoring.colorString("A", GameColor.YELLOW), string1);
+
+
+        // Un pion ACTIF sur une case Bonus dois être VERT
+        boardContentSprite.setCurrentPawn(pawn1);
+
+        String string2 = boardContentSprite.squareContentSprite(new Position(1, 2));
+        assertEquals(StringColoring.colorString("A", GameColor.GREEN), string2);
+
+
+        // Un pion ACTIF sur une case non-Bonus dois être BLUE
+        boardContentSprite.setCurrentPawn(pawn2);
+
+        String string3 = boardContentSprite.squareContentSprite(new Position(0, 0));
+        assertEquals(StringColoring.colorString("D", GameColor.BLUE), string3);
     }
 
     @Test
@@ -199,5 +257,24 @@ public class TestBoard {
 
         boardGetCurrentPawn.newTurn();
         assertEquals(Pawn1.getLetter(), boardGetCurrentPawn.getCurrentPawn().getLetter());
+    }
+
+    @Test
+    @DisplayName("S'assure que la sortie texte soit correcte")
+    public void testToString(){
+        board.removeAllPawns();
+
+        Pawn Pawn1 = new Pawn('A', 2, 0, board);
+        Pawn Pawn2 = new Pawn('B', 3, 1, board);
+        Pawn Pawn3 = new Pawn('C', 0, 2, board);
+
+        board.addPawn(Pawn1);
+        board.addPawn(Pawn2);
+        board.addPawn(Pawn3);
+
+        String diese = StringColoring.colorString("#", GameColor.YELLOW);
+        String texteAttendu =  ".." + diese + ".\nC...\n...B\n..A.\n";
+
+        assertEquals(texteAttendu, board.toString());
     }
 }

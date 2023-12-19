@@ -77,7 +77,7 @@ public class Board {
     public Board(int numberOfPawns, int sizeX, int sizeY, int xBonus, int yBonus) {
         this.xSize = sizeX;
         this.ySize = sizeY;
-        this.bonusSquare = new Position(xBonus, yBonus);
+        this.bonusSquare = new Position(xBonus-1, yBonus-1);
         this.pawns = new ArrayList<Pawn>();
 
         int i=1;
@@ -225,9 +225,11 @@ public class Board {
             for (int x = 0; x < xSize; x++) {
                 Position squarePosition = new Position(x, y);
                 result += squareContentSprite(squarePosition);
-                if (x == xSize) {
-                    result += '|';
-                }
+                // On a comme invariant x<xSize. Donc on ne peux pas rentrer dans ce if
+                // De plus le charactère '|' ne correspond à rien dans la spec, on peux donc le supprimer
+                // if (x == xSize) {
+                //     result += '|';
+                // }
             }
             result += "\n";
         }
@@ -286,6 +288,12 @@ public class Board {
      */
     public Position getBonusSquare() {
         return bonusSquare;
+    }
+
+    public void setCurrentPawn(Pawn p){
+        if(pawns.contains(p)){
+            currentPawn = p;
+        }
     }
 }
 
