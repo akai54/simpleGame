@@ -76,4 +76,19 @@ public class TestGame {
             game.playRound(Direction.Left);
         });
     }
+
+    @Test
+    @DisplayName("Test de playRound avec un déplacement qui attaque")
+    public void testPlayRoundAttack() {
+        Pawn pawn1 = new Pawn( 'A', 1, 1, board);
+        Pawn pawn2 = new Pawn( 'B', 1, 2, board);
+
+        board.removePawn(board.getCurrentPawn());
+        board.addPawn(pawn1);
+        board.removePawn(board.getCurrentPawn());
+        board.addPawn(pawn2);
+
+        assertEquals(pawn1.getLetter(), game.getBoard().getCurrentPawn().getLetter());
+        assertDoesNotThrow(() -> game.playRound(Direction.Up));
+    }
 }
